@@ -18,23 +18,31 @@
   <script src="./js/jquery.min.js"></script>
   <link href="https://npm.elemecdn.com/artalk@2.5.5/dist/ArtalkLite.css" rel="stylesheet">
 </head>
-<body class='page'>
+<body class='page '>
 <div id="head"></div>
 <script type="text/javascript">
     $('#head').load('./header.html');
 </script>
-<div id="wrapper" class="wrapper">  
-  <div class="memos-header">
-     <div class="intro"></div>
-     <div class="pagetitle">#<span class="bb-load"></span></div>
-     <div id="memos" class="img-hide"></div>
-  </div>
-  <div id="bber"></div>
-  <div id="footer"></div>
-<script type="text/javascript">
-      $('#footer').load('./footer.html'); 
+<div id="wrapper" class="wrapper">
+<script src="./js/moment.min.js?v=2.29.4"></script>
+<script src="./js/moment.twitter.min.js"></script>
+<script>
+function formatDate(param) {
+if(typeof param === 'number') {
+     param = new Date(param * 1000).toISOString();
+  }
+return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
+}
 </script>
-<script src="./js/marked.min.js"></script>
+    
+<div class="memos-header">
+<div class="intro">
+</div>
+<div class="pagetitle">#<span class="bb-load"></span></div>
+<div id="memos" class="img-hide"></div>
+</div>
+<div id="bber"></div>
+<script src="https://fastly.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script type="text/javascript">
   var bbMemos = {
     memos : 'https://ee.eeeeeeeeeeeeee.ee/',
@@ -43,20 +51,16 @@
     domId: '',
   }
 </script>
-<script>
-function formatDate(param) {
-if(typeof param === 'number') {
-     param = new Date(param * 1000).toISOString();
-  }
-return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
-}
-</script>  
-<script src="./js/moment.min.js?v=2.29.4"></script>
-<script src="./js/moment.twitter.min.js"></script>   
-<script src="https://npm.elemecdn.com/artalk@2.5.5/dist/ArtalkLite.js"></script>   
 <script src="./js/memos.js?v=0.0.1"></script>
-<script src="./js/memos-editor.js?1"></script>
+<script src="./js/memos-editor.js?"></script>
 <script src="./js/coco-message.min.js"></script>
+<link href="https://npm.elemecdn.com/artalk@2.5.5/dist/ArtalkLite.css" rel="stylesheet">
+<script src="https://npm.elemecdn.com/artalk@2.5.5/dist/ArtalkLite.js"></script>
+<script type="text/javascript" src="./js/bundle.min.ec26b59a00a2590684251feed454cb3affa248a483c1f9e342d419d474ef6451.js"></script>
+<div id="footer"></div>
+<script type="text/javascript">
+    $('#footer').load('./footer.html');
+</script>
 <script async src="https://u.ima.cm/script.js" data-website-id="091b8bf0-fe1b-4d10-bb6e-6b9fb4407960"></script>
 </div>
 </body>
