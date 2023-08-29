@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>14E - Memos </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./img/icon.png">
+  <link href="/index.xml" title="Memos" type="application/rss+xml">
+  <link rel="canonical" href="https://memos.im/" />
+  <link rel="stylesheet" href="./css/style.min.5bc838d16b2042ae0c75c504f0c3a16c2c4a4e762458778dea73d28a99cdafed.css">
+  <meta name="description" content=""/>
+  <meta property="og:title" content="Memos"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://memos.im/"/>
+  <meta property="og:description" content=""/>
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.css" rel="stylesheet">
+<script src="./js/jquery.min.js"></script>
+</head>
+<body class='page '>
+<div id="head"></div>
+<script type="text/javascript">
+    $('#head').load('./header.html');
+</script>
+<script src="./js/moment.min.js?v=2.29.4"></script>
+<script src="./js/moment.twitter.min.js"></script>
+<script>
+function formatDate(param) {
+if(typeof param === 'number') {
+     param = new Date(param * 1000).toISOString();
+  }
+return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
+}
+</script>
+    
+<div class="memos-header">
+<div class="intro">
+    <div class='load-memos-editor'>链接</div>
+</div>
+<div class="pagetitle"># 友情链接 </div>
+<div id="memos" class="img-hide"></div>
+<div class="memos-search-all img-hide visible">
+    
+<style>
+    .clearfix {
+        zoom: 1;
+    }
+
+    .clearfix:after {
+        content: '.';
+        display: block;
+        visibility: hidden;
+        height: 0;
+        clear: both;
+    }
+
+    .readers-list {
+        list-style: none;
+    }
+
+    .readers-list * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .readers-list li {
+        position: relative;
+        float: left;
+        margin-top: 20px !important;
+        padding: 0 10px;
+    }
+
+    .readers-list li a {
+        display: block;
+        border: 1px solid #eee;
+        border-left: 3px solid #FF002B;
+        border-radius: 7px;
+        padding-left: 15px;
+        transition: all .3s;
+        color: white;
+    }
+
+    .readers-list li:nth-of-type(6n+1) a {
+        border-left-color: #FF002B;
+    }
+
+    .readers-list li:nth-of-type(6n+2) a {
+        border-left-color: #FFA900;
+    }
+
+    .readers-list li:nth-of-type(6n+3) a {
+        border-left-color: #00CC00;
+    }
+
+    .readers-list li:nth-of-type(6n+4) a {
+        border-left-color: #00CCFF;
+    }
+
+    .readers-list li:nth-of-type(6n+5) a {
+        border-left-color: #0089FA;
+    }
+
+    .readers-list li:nth-of-type(6n+6) a {
+        border-left-color: #404040;
+    }
+
+    .readers-list li a div {
+        padding: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #999;
+    }
+
+    .readers-list li a div:first-child {
+        border-bottom: 1px dashed #eee;
+        font-size: 1.3em;
+        color: #666;
+    }
+
+    .readers-list li a:hover {
+        -webkit-transform: translateY(-6px);
+        transform: translateY(-6px);
+        box-shadow: 0 26px 40px -24px rgba(0, 0, 0, 0.3);
+    }
+
+    .link-title {
+        position: relative;
+        left: -19px;
+        display: inline-block;
+        margin: 20px 0;
+        font-size: 15px;
+        padding: 0 30px 0 25px;
+        height: 45px;
+        line-height: 45px;
+        border-radius: 0 35px 35px 0;
+        background: #404040;
+        color: #fff;
+    }
+
+    .page-common ul li,
+    .page-common ol li {
+        margin-bottom: 12px;
+    }
+
+    .page-friends ul {
+        padding: 0;
+        margin: 0;
+    }
+</style>
+<div class="page-friends page-common">
+    <ul class="readers-list clearfix" id="friend_list">
+        正在加载
+    </ul>
+</div>
+<script>
+    var friend_list = document.getElementById('friend_list')
+    fetch('https://1.0tz.top/api/friends?isVis=True')
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(function (data) {
+            // 随机打乱数据
+            var shuffledData = data.sort(function () {
+                return 0.5 - Math.random();
+            });
+
+            var content = '';
+            shuffledData.forEach(element => {
+                content += `<li class="wow slideInUp animated" style="animation-name: slideInUp;">
+                <a target="_blank" href="${element.link}">
+                    <div>${element.name}</div>
+                </a>
+            </li>`;
+            });
+
+            friend_list.innerHTML = content;
+        })
+        .catch(function (error) {
+            console.error('Error:', error);
+        });
+
+</script>
+</div>
+</div>
+
+<script src="./js/marked.min.js"></script>
+<script src="./js/coco-message.min.js"></script>
+<div id="footer"></div>
+<script type="text/javascript">
+      $('#footer').load('./footer.html'); 
+</script>
+  <script async src="https://u.ima.cm/script.js" data-website-id="091b8bf0-fe1b-4d10-bb6e-6b9fb4407960"></script>
+</body>
+</html>

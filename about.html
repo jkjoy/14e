@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>14E - Memos </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./img/icon.png">
+  <link href="/index.xml" title="Memos" type="application/rss+xml">
+  <link rel="canonical" href="https://memos.im/" />
+  <link rel="stylesheet" href="./css/style.min.5bc838d16b2042ae0c75c504f0c3a16c2c4a4e762458778dea73d28a99cdafed.css">
+  <meta name="description" content=""/>
+  <meta property="og:title" content="Memos"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://memos.im/"/>
+  <meta property="og:description" content=""/>
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.css" rel="stylesheet">
+<script src="./js/jquery.min.js"></script>
+</head>
+<body class='page '>
+<div id="head"></div>
+<script type="text/javascript">
+    $('#head').load('./header.html');
+</script>
+<script src="./js/moment.min.js?v=2.29.4"></script>
+<script src="./js/moment.twitter.min.js"></script>
+<script>
+function formatDate(param) {
+if(typeof param === 'number') {
+     param = new Date(param * 1000).toISOString();
+  }
+return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
+}
+</script>
+    
+<div class="memos-header">
+<div class="intro">
+    <div class='load-memos-editor'>关于</div>
+</div>
+<div class="pagetitle"># 鸣谢 </div>
+<div id="memos" class="img-hide"></div>
+<div class="memos-search-all img-hide visible">
+    
+<ul>
+<li>本站目前基本<code>功能</code>基于<code><a href='https://ee.eeeeeeeeeeeeee.ee/' target="_blank">Memos</a></code>实现</li>
+<br>
+<li>服务部署于<code><a href='https://fly.io/' target="_blank">fly.io</a></code>,由<code>cloudflare</code>加速</li>
+<br>
+<li>评论功能由<code>Artalk</code>实现.</li>
+<br>
+<li><code><a href='https://e.eeeeeeeeeeeeee.ee/' target="_blank">Artalk</a></code>同样部署于<code><a href='https://fly.io/' target="_blank">fly.io</a></code></li>
+<br>
+
+<li><code>文章</code>和<code>链接</code>页面由<code>Moments</code>实现.</li>
+<br>
+<li><code><a href='https://1.0tz.top/' target="_blank">Moments</a></code>部署于<code><a href='https://zeabur.com/' target="_blank">Zeabur</a></code></li>
+<br>
+<li><code>动态</code>页面来自于<code><a href='https://koobai.com/memos/' target="_blank">空白Koobai</a></code></li>
+<br>
+<li><code>清单</code>页面来自于<code><a href='https://blog.leonus.cn/todo/' target="_blank">leonus</a></code></li>
+<br>
+<li><code>照片</code>功能来自于<code><a href='https://blog.leonus.cn/' target="_blank">leonus</a></code></li>
+<br>
+<li><code>点赞</code>功能来自于<code><a href='https://eallion.com/self-hosted-github-flavored-reactions/' target="_blank">大大的小蜗牛</a></code></li>
+<br>
+<li><code>网站统计</code>功能来自于<code><a href='https://u.ima.cm/' target="_blank">Umami</a></code>部署在<code>vercel</code></li>
+<br>
+<li>感谢以上</li>
+</ul>
+</div>
+</div>
+<script src="./js/marked.min.js"></script>
+<script src="./js/coco-message.min.js"></script>
+<div id="footer"></div>
+<script type="text/javascript">
+      $('#footer').load('./footer.html'); 
+</script>
+  <script async src="https://u.ima.cm/script.js" data-website-id="091b8bf0-fe1b-4d10-bb6e-6b9fb4407960"></script>
+</body>
+</html>

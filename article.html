@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>14E - Memos </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./img/icon.png">
+  <link href="/index.xml" title="Memos" type="application/rss+xml">
+  <link rel="canonical" href="https://memos.im/" />
+  <link rel="stylesheet" href="./css/style.min.5bc838d16b2042ae0c75c504f0c3a16c2c4a4e762458778dea73d28a99cdafed.css">
+  <meta name="description" content=""/>
+  <meta property="og:title" content="Memos"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://memos.im/"/>
+  <meta property="og:description" content=""/>
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.css" rel="stylesheet">
+<script src="./js/jquery.min.js"></script>
+</head>
+<body class='page '>
+<div id="head"></div>
+<script type="text/javascript">
+    $('#head').load('./header.html');
+</script>
+<script src="./js/moment.min.js?v=2.29.4"></script>
+<script src="./js/moment.twitter.min.js"></script>
+<script>
+function formatDate(param) {
+if(typeof param === 'number') {
+     param = new Date(param * 1000).toISOString();
+  }
+return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
+}
+</script>
+    
+<div class="memos-header">
+<div class="intro">
+    <div class='load-memos-editor'>文章</div>
+</div>
+<div class="pagetitle"># 最近更新的文章 </div>
+<div id="memos" class="img-hide"></div>
+<div class="memos-search-all img-hide visible">
+    
+<style>
+    #article-list-container {
+        font-family: Arial, sans-serif;
+        background-color: #FFFFFF;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    .article-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .article-list li {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+
+    .article-list li a {
+        color: #333;
+        text-decoration: none;
+    }
+
+    .article-list li a:hover {
+        text-decoration: underline;
+    }
+
+    .article-list li .pub-date {
+        font-size: 12px;
+        color: #777;
+    }
+</style>
+<div id="article-list-container">
+    <ul id="articleList" class="article-list"></ul>
+</div>
+<script id="moments-js-">
+    const articleListElement = document.getElementById('articleList');
+    fetch('https://1.0tz.top/api/articles?friendid=1')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(article => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+            <a href="${article.Link}" target="_blank">${article.Title}</a>
+            <p class="pub-date">${article.PubDate}</p>
+            <p>${article.Description}</p>
+          `;
+                articleListElement.appendChild(listItem);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+</script>
+</div>
+</div>
+<script src="./js/marked.min.js"></script>
+<script src="./js/coco-message.min.js"></script>
+<div id="footer"></div>
+<script type="text/javascript">
+      $('#footer').load('./footer.html'); 
+</script>
+  <script async src="https://u.ima.cm/script.js" data-website-id="091b8bf0-fe1b-4d10-bb6e-6b9fb4407960"></script>
+</body>
+</html>
