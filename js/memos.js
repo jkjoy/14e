@@ -17,6 +17,12 @@ if(typeof(bbMemos) !=="undefined"){
     }
   }
 }
+function animateSummaries() {
+  // 代码实现滑动加载动画
+}
+
+// 在这里调用“animateSummaries”函数
+animateSummaries();
 function loadCssCode(code){
 var style = document.createElement('style');
 style.type = 'text/css';
