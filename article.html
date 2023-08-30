@@ -22,23 +22,14 @@
 <script type="text/javascript">
     $('#head').load('./header.html');
 </script>
-<script>
-function formatDate(param) {
-if(typeof param === 'number') {
-     param = new Date(param * 1000).toISOString();
-  }
-return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
-}
-</script>
-   <div id="wrapper" class="wrapper">   
+<div id="wrapper" class="wrapper">   
 <div class="memos-header">
 <div class="intro">
     <div class='load-memos-editor'>文章</div>
 </div>
 <div class="pagetitle"># 最近更新的文章 </div>
 <div id="memos" class="img-hide"></div>
-<div class="memos-search-all img-hide visible">
-    
+<div class="memos-search-all img-hide visible">    
 <style>
    #article-list-container {
         font-family: Arial, sans-serif;
@@ -87,8 +78,7 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
     <ul id="articleList" class="article-list"></ul>
 </div>
 <script id="moments-js-">
-
-    const articleListElement = document.getElementById('articleList');
+ const articleListElement = document.getElementById('articleList');
     fetch('https://1.0tz.top/api/articles?friendid=1')
         .then(response => response.json())
         .then(data => {
