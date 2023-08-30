@@ -6,7 +6,7 @@ var memosData = {
   
 var bbMemo = {
   memos: 'https://memos.koobai.com/',
-  limit: '10',
+  limit: '15',
   creatorId: '101',
   domId: '#bber',
 };
@@ -17,21 +17,6 @@ if(typeof(bbMemos) !=="undefined"){
     }
   }
 }
-//function animateSummaries() {
-  // 代码实现滑动加载动画
-//}
-
-// 在这里调用“animateSummaries”函数
-//animateSummaries();
-function changeFont() {
-  const link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.type = "text/css";
-  link.href = "https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.7.0/lxgwwenkaiscreen.css";
-  document.head.append(link);
-};
-changeFont()
-
 function loadCssCode(code){
 var style = document.createElement('style');
 style.type = 'text/css';
@@ -105,7 +90,7 @@ fetch(bbUrl).then(res => res.json()).then( resdata =>{
   //在未展开评论时，默认显示评论数
   Artalk.loadCountWidget({
     server: 'https://e.eeeeeeeeeeeeee.ee/',
-    site: 'memos', 
+    site: 'memo', 
     countEl: '#ArtalkCount'
   });
 })
@@ -264,7 +249,7 @@ function getTagNow(e){
   //在未展开评论时，默认显示评论数
   Artalk.loadCountWidget({
     server: 'https://e.eeeeeeeeeeeeee.ee/',
-    site: 'memos', 
+    site: 'memo', 
     countEl: '#ArtalkCount'
   });
   })
@@ -364,7 +349,7 @@ function loadArtalk(memo_id) {
       pageKey: '/m/' + memo_id,
       pageTitle: '',
       server: 'https://e.eeeeeeeeeeeeee.ee/',
-      site: 'memos',
+      site: 'memo',
       darkMode: 'auto'
     });
   } else {
