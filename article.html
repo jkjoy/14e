@@ -87,6 +87,14 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
     <ul id="articleList" class="article-list"></ul>
 </div>
 <script id="moments-js-">
+  function changeFont() {
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.type = "text/css";
+  link.href = "https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.7.0/lxgwwenkaiscreen.css";
+  document.head.append(link);
+};
+changeFont()
     const articleListElement = document.getElementById('articleList');
     fetch('https://1.0tz.top/api/articles?friendid=1')
         .then(response => response.json())
