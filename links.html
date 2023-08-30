@@ -164,7 +164,6 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
             var shuffledData = data.sort(function () {
                 return 0.5 - Math.random();
             });
-
             var content = '';
             shuffledData.forEach(element => {
                 content += `<li class="wow slideInUp animated" style="animation-name: slideInUp;">
@@ -173,13 +172,11 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
                 </a>
             </li>`;
             });
-
             friend_list.innerHTML = content;
         })
         .catch(function (error) {
             console.error('Error:', error);
         });
-
 </script>
 </div>
 </div>
