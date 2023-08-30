@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title> Memos </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./img/logo.png">
+  <link href="/index.xml" title="Memos" type="application/rss+xml">
+  <link rel="canonical" href="https://memos.im/" />
+  <link rel="stylesheet" href="./css/style.min.css">
+  <meta name="description" content=""/>
+  <meta property="og:title" content="Memos"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://memos.im/"/>
+  <meta property="og:description" content=""/>
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/lxgw-wenkai-webfont/1.6.0/style.css" />
+  <!-- 没有Lite version, 有需要的可以向cdnjs发pr看看能不能通过-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.1.0/style.css" />
+  <!-- 没有TC version, 有需要的可以向cdnjs发pr看看能不能通过-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-tc-webfont@1.0.0/style.css" />
+  <!-- Screen version -->
+  <link rel="stylesheet" href="https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/style.css" />
+  <style>
+    body {
+      font-family: "LXGW WenKai", sans-serif;
+      /* Lite version */
+      font-family: "LXGW WenKai Lite", sans-serif;
+      /* TC version */
+      font-family: "LXGW WenKai TC", sans-serif;
+      /* Screen version */
+      font-family: "LXGW WenKai Screen", sans-serif;
+    }
+  </style>
+  <script src="./js/jquery-3.6.0.min.js"  crossorigin="anonymous"></script>
+</head>
+<body class='page '>
+<div id="head"></div>
+<script type="text/javascript">
+    $('#head').load('./header.html');
+</script>
+<div id="wrapper" class="wrapper">
+<script src="./js/moment.min.js?v=2.29.4"></script>
+<script src="./js/moment.twitter.min.js"></script>
+<script>
+function formatDate(param) {
+if(typeof param === 'number') {
+     param = new Date(param * 1000).toISOString();
+  }
+return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
+}
+</script>
+    
+<div class="memos-header">
+<div class="intro">
+  <div class='load-memos-editor'>清单</div>
+</div>
+<div class="pagetitle"># 那些完成或未完成的清单<span class="bb-load"></span></div>
+<div id="memos" class="img-hide"></div>
+<div class="memos-search-all img-hide visible">
+    <div id="todolist"></div>
+</div>
+</div>
+<style>
+/* 页面初始化 */
+div#page {
+    background: none;
+    border: 0;
+    padding: 0;
+}
+
+div#todolist {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+.list_item {
+    display: inline-block;
+    width: calc(50% - .4rem);
+    background: #F5F5F5;
+    border-radius: 12px;
+    padding: 10px 1rem 1.2rem;
+    border: 2px dashed #F6F8F6;
+    --todo-border: 1px solid #f7a796;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+.list_item h3 {
+    margin: 0;
+    border-bottom: var(--todo-border);
+}
+.list_item ul {
+    font-size: 17px;
+    padding: 0 !important;
+    margin: 0;
+}
+ .list_item li{
+    margin: 0 !important;
+    border-bottom: var(--todo-border);
+ }
+.list_item li::marker {
+  content: none;
+}
+li.achieve {
+    opacity: .8;
+    text-decoration: line-through;
+}
+@media screen and (max-width: 900px) {
+  div#todolist {
+    margin: 1rem 5px 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .list_item{
+    width: 100%;
+  }
+}
+</style>
+
+
+
+
+
+<script>
+// 瀑布流函数，不用管
+function waterfall(t){function e(t,e){var n=window.getComputedStyle(e);return parseFloat(n["margin"+t])||0}function n(t){return t+"px"}function r(t){return parseFloat(t.style.left)}function o(t){return t.clientWidth}function l(t){return function(t){return parseFloat(t.style.top)}(t)+function(t){return t.clientHeight}(t)+e("Bottom",t)}function i(t){return r(t)+o(t)+e("Right",t)}function u(t){t=t.sort((function(t,e){return l(t)===l(e)?r(e)-r(t):l(e)-l(t)}))}function a(e){o(t)!=h&&(e.target.removeEventListener(e.type,arguments.callee),waterfall(t))}"string"==typeof t&&(t=document.querySelector(t));var s=[].map.call(t.children,(function(t){return t.style.position="absolute",t}));t.style.position="relative";var f=[];s.length&&(s[0].style.top="0px",s[0].style.left=n(e("Left",s[0])),f.push(s[0]));for(var p=1;p<s.length;p++){var c=s[p-1],y=s[p];if(!(i(c)+o(y)<=o(t)))break;y.style.top=c.style.top,y.style.left=n(i(c)+e("Left",y)),f.push(y)}for(;p<s.length;p++){u(f);y=s[p];var d=f.pop();y.style.top=n(l(d)+e("Top",y)),y.style.left=n(r(d)),f.push(y)}u(f);var v=f[0];t.style.height=n(l(v));var h=o(t);window.addEventListener?window.addEventListener("resize",a):document.body.onresize=a}
+
+// 清单函数
+todolist();
+function todolist() {
+    fetch('https://ee.eeeeeeeeeeeeee.ee/api/v1/memo?creatorId=3&tag=清单').then(res => res.json()).then(data => { // 注意替换链接和ID
+        // 获取并处理数据
+        data = data
+        let box = document.getElementById('todolist')
+        data.forEach(item => {
+            // 处理数据
+            let content = item.content,
+                title = content.match(/\[(.*?)\]/g)[0].replace(/\[(.*?)\]/,'$1');
+            // 去掉多余内容，替换清单内容
+            content = content.replace(/#.*\s/g, '').replace(/(-\s\[\s\]\s)(.*)/g, `<li><i style="margin-right: 5px;" class="fa-regular fa-circle"></i>$2</li>`).replace(/(-\s\[x\]\s)(.*)/g, `<li class="achieve"><i style="margin-right: 5px;" class="fa-regular fa-circle-check"></i>$2</li>`);
+            // 渲染数据
+            let div = document.createElement('div');
+            div.className = 'list_item';
+            div.innerHTML = `<h3>${title}</h3><ul>${content}</ul>`;
+            box.appendChild(div);
+        });
+        waterfall('#todolist');
+    }).catch()
+}
+</script>  
+
+<script src="https://fastly.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="./js/coco-message.min.js"></script>
+<link href="https://npm.elemecdn.com/artalk@2.5.5/dist/ArtalkLite.css" rel="stylesheet">
+<script src="https://npm.elemecdn.com/artalk@2.5.5/dist/ArtalkLite.js"></script>
+  </div>
+<script>
+  window.addEventListener('load', function() {
+  document.body.classList.add('loaded');
+});
+  </script> 
+  <div id="footer"></div>
+<script type="text/javascript">
+    $('#footer').load('./footer.html');
+</script>
+<script type="text/javascript" src="./js/bundle.min.ec26b59a00a2590684251feed454cb3affa248a483c1f9e342d419d474ef6451.js"></script>
+<script async src="https://u.ima.cm/script.js" data-website-id="62be879f-564d-4fbb-813e-0f4fcf46e96c"></script>
+</body>
+</html>
