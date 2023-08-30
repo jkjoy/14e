@@ -17,12 +17,21 @@ if(typeof(bbMemos) !=="undefined"){
     }
   }
 }
-function animateSummaries() {
+//function animateSummaries() {
   // 代码实现滑动加载动画
-}
+//}
 
 // 在这里调用“animateSummaries”函数
-animateSummaries();
+//animateSummaries();
+function changeFont() {
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.type = "text/css";
+  link.href = "https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.7.0/lxgwwenkaiscreen.css";
+  document.head.append(link);
+};
+changeFont()
+
 function loadCssCode(code){
 var style = document.createElement('style');
 style.type = 'text/css';
