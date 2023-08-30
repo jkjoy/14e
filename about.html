@@ -72,14 +72,7 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
   window.addEventListener('load', function() {
   document.body.classList.add('loaded');
 });
-  function changeFont() {
-  const link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.type = "text/css";
-  link.href = "https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.7.0/lxgwwenkaiscreen.css";
-  document.head.append(link);
-};
-changeFont()
+
 </script>
 <script src="./js/marked.min.js"></script>
 <script src="./js/coco-message.min.js"></script>
