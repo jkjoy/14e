@@ -90,7 +90,7 @@ fetch(bbUrl).then(res => res.json()).then( resdata =>{
   //在未展开评论时，默认显示评论数
   Artalk.loadCountWidget({
     server: 'https://e.eeeeeeeeeeeeee.ee/',
-    site: 'memo', 
+    site: 'memos', 
     countEl: '#ArtalkCount'
   });
 })
@@ -249,7 +249,7 @@ function getTagNow(e){
   //在未展开评论时，默认显示评论数
   Artalk.loadCountWidget({
     server: 'https://e.eeeeeeeeeeeeee.ee/',
-    site: 'memo', 
+    site: 'memos', 
     countEl: '#ArtalkCount'
   });
   })
@@ -349,7 +349,7 @@ function loadArtalk(memo_id) {
       pageKey: '/m/' + memo_id,
       pageTitle: '',
       server: 'https://e.eeeeeeeeeeeeee.ee/',
-      site: 'memo',
+      site: 'memos',
       darkMode: 'auto'
     });
   } else {
