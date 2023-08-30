@@ -22,15 +22,7 @@
 <script type="text/javascript">
     $('#head').load('./header.html');
 </script>
-<script>
-function formatDate(param) {
-if(typeof param === 'number') {
-     param = new Date(param * 1000).toISOString();
-  }
-return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
-}
-</script>
- <div id="wrapper" class="wrapper">     
+<div id="wrapper" class="wrapper">     
 <div class="memos-header">
 <div class="intro">
     <div class='load-memos-editor'>关于</div>
@@ -38,7 +30,6 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 <div class="pagetitle"># 鸣谢 </div>
 <div id="memos" class="img-hide"></div>
 <div class="memos-search-all img-hide visible">
-    
 <ul>
 <li>本站目前基本<code>功能</code>基于<code><a href='https://ee.eeeeeeeeeeeeee.ee/' target="_blank">Memos</a></code>实现</li>
 <br>
@@ -48,7 +39,6 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 <br>
 <li><code><a href='https://e.eeeeeeeeeeeeee.ee/' target="_blank">Artalk</a></code>同样部署于<code><a href='https://fly.io/' target="_blank">fly.io</a></code></li>
 <br>
-
 <li><code>文章</code>和<code>链接</code>页面由<code>Moments</code>实现.</li>
 <br>
 <li><code><a href='https://1.0tz.top/' target="_blank">Moments</a></code>部署于<code><a href='https://zeabur.com/' target="_blank">Zeabur</a></code></li>
