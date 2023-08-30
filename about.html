@@ -67,7 +67,12 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </ul>
 </div>
 </div>
- </div>
+</div>
+<script>
+  window.addEventListener('load', function() {
+  document.body.classList.add('loaded');
+});
+</script>
 <script src="./js/marked.min.js"></script>
 <script src="./js/coco-message.min.js"></script>
 <div id="footer"></div>
