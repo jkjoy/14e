@@ -121,6 +121,14 @@ function todolist() {
         waterfall('#todolist');
     }).catch()
 }
+  function changeFont() {
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.type = "text/css";
+  link.href = "https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.7.0/lxgwwenkaiscreen.css";
+  document.head.append(link);
+};
+changeFont();
 </script>  
 <script src="./js/coco-message.min.js"></script>
 </div>
