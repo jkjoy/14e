@@ -5,7 +5,7 @@ var memosData = {
 	}
   
 var bbMemo = {
-  memos: 'https://memos.koobai.com/',
+  memos: 'https://3.0tz.top/',
   limit: '15',
   creatorId: '101',
   domId: '#bber',
@@ -89,7 +89,7 @@ fetch(bbUrl).then(res => res.json()).then( resdata =>{
   }
   //在未展开评论时，默认显示评论数
   Artalk.loadCountWidget({
-    server: 'https://e.eeeeeeeeeeeeee.ee/',
+    server: 'https://2.0tz.top/',
     site: 'memos', 
     countEl: '#ArtalkCount'
   });
@@ -206,7 +206,7 @@ function updateHTMl(data){
         <div class="memos-tag-wz">${memosTag}</div>
         <div class="datacont" view-image>${bbContREG}</div>
         <div class="memos_diaoyong_top">
-        <div class="memos-zan"><emoji-reaction class="reactions" reactTargetId="/m/${memo_id}" theme="system" endpoint="https://eeee.eeeeeeeeeeeeee.ee" availableArrayString="👍,thumbs-up;🎉,party-popper;😄,smile-face;😎,cool;"></emoji-reaction></div>
+        <div class="memos-zan"><emoji-reaction class="reactions" reactTargetId="/m/${memo_id}" theme="system" endpoint="https://14.0tz.top" availableArrayString="👍,thumbs-up;🎉,party-popper;😄,smile-face;😎,cool;"></emoji-reaction></div>
         <div class="talks_comments">
             <a onclick="loadArtalk('${memo_id}')">
               <span id="ArtalkCount" data-page-key="/m/${memo_id}" class="comment-s"></span> 条评论  <span id="btn_memo_${memo_id}">
@@ -248,7 +248,7 @@ function getTagNow(e){
 
   //在未展开评论时，默认显示评论数
   Artalk.loadCountWidget({
-    server: 'https://e.eeeeeeeeeeeeee.ee/',
+    server: 'https://2.0tz.top/',
     site: 'memos', 
     countEl: '#ArtalkCount'
   });
@@ -348,7 +348,7 @@ function loadArtalk(memo_id) {
       el: '#memo_' + memo_id,
       pageKey: '/m/' + memo_id,
       pageTitle: '',
-      server: 'https://e.eeeeeeeeeeeeee.ee/',
+      server: 'https://2.0tz.top/',
       site: 'memos',
       darkMode: 'auto'
     });
