@@ -5,7 +5,7 @@ var memosData = {
 	}
   
 var bbMemo = {
-  memos: 'https://3.0tz.top/',
+  memos: 'https://ee.eeeeeeeeeeeeee.ee/',
   limit: '15',
   creatorId: '101',
   domId: '#bber',
