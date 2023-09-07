@@ -89,7 +89,7 @@ fetch(bbUrl).then(res => res.json()).then( resdata =>{
   }
   //在未展开评论时，默认显示评论数
   Artalk.loadCountWidget({
-    server: 'https://2.0tz.top/',
+    server: 'https://artalk.loliko.cn/',
     site: 'memos', 
     countEl: '#ArtalkCount'
   });
@@ -248,7 +248,7 @@ function getTagNow(e){
 
   //在未展开评论时，默认显示评论数
   Artalk.loadCountWidget({
-    server: 'https://2.0tz.top/',
+    server: 'https://artalk.loliko.cn/',
     site: 'memos', 
     countEl: '#ArtalkCount'
   });
@@ -348,7 +348,7 @@ function loadArtalk(memo_id) {
       el: '#memo_' + memo_id,
       pageKey: '/m/' + memo_id,
       pageTitle: '',
-      server: 'https://2.0tz.top/',
+      server: 'https://artalk.loliko.cn/',
       site: 'memos',
       darkMode: 'auto'
     });
