@@ -30,72 +30,24 @@
 <div class="pagetitle"># 最近更新的文章 </div>
 <div id="memos" class="img-hide"></div>
 <div class="memos-search-all img-hide visible">    
-<style>
-   #article-list-container {
-        font-family: Arial, sans-serif;
-        background-color: #FFFFFF;
-        padding: 20px;
-        padding-left: 0px;
-        padding-top: 0px;
-        padding-right: 0px;
-        padding-bottom: 0px;
+<div id="hexo-circle-of-friends-root"></div>
+<script>
+    let UserConfig = {
+        // 填写你的api地址
+        private_api_url: 'https://fr.jiong.us/',
+        // 初始加载几篇文章
+        page_init_number: 20,
+        // 点击加载更多时，一次最多加载几篇文章，默认10
+        page_turning_number: 10,
+        // 头像加载失败时，默认头像地址
+        error_img: 'https://sdn.geekzu.org/avatar/57d8260dfb55501c37dde588e7c3852c',
+        // 进入页面时第一次的排序规则
+        sort_rule: 'created',
+        // 本地文章缓存数据过期时间（天）
+        expire_days: 1, 
     }
-
-    h1 {
-        text-align: center;
-        color: #333;
-    }
-
-    .article-list {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .article-list li {
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin-bottom: 10px;
-    }
-
-    .article-list li a {
-        color: #333;
-        text-decoration: none;
-    }
-
-    .article-list li a:hover {
-        text-decoration: underline;
-    }
-
-    .article-list li .pub-date {
-        font-size: 12px;
-        color: #777;
-    }
-</style>
-<div id="article-list-container">
-    <ul id="articleList" class="article-list"></ul>
-</div>
-<script id="moments-js-">
- const articleListElement = document.getElementById('articleList');
-    fetch('https://1.0tz.top/api/articles')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(article => {
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `
-            <a href="${article.Link}" target="_blank">${article.Title}</a>
-            <p class="pub-date">${article.PubDate}</p>
-            <p>${article.Description}</p>
-          `;
-                articleListElement.appendChild(listItem);
-            });
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
 </script>
+<script type="text/javascript" src="https://npm.elemecdn.com/fcircle-theme-yyyz@1.0.13/dist/fcircle.min.js"></script>
 </div>
 </div>
 </div>
