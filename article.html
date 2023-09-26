@@ -30,22 +30,34 @@
 <div class="pagetitle"># 最近更新的文章 </div>
 <div id="memos" class="img-hide"></div>
 <div class="memos-search-all img-hide visible">    
-<div id="hexo-circle-of-friends-root"></div>
+<div class="links"></div>
 <script>
-    let UserConfig = {
-        // 填写你的api地址
-        private_api_url: 'https://fr.jiong.us/',
-        // 初始加载几篇文章
-        page_init_number: 20,
-        // 点击加载更多时，一次最多加载几篇文章，默认10
-        page_turning_number: 10,
-        // 头像加载失败时，默认头像地址
-        error_img: 'https://sdn.geekzu.org/avatar/57d8260dfb55501c37dde588e7c3852c',
-        // 进入页面时第一次的排序规则
-        sort_rule: 'created',
-        // 本地文章缓存数据过期时间（天）
-        expire_days: 1, 
-    }
+  var linksUrl = 'https://fr.jiong.us/data.json';
+var linksDom = document.querySelector('.links');
+if (linksDom) {
+	getLinks()
+}
+function getLinks() {
+  fetch(linksUrl).then(res => res.json()).then(resdata => {
+  updateHtml(resdata.article_data);
+  });
+}
+function updateHtml(data){
+  var result = "",
+  resultAll = "";
+  for (var i = 0; i < data.length; i++) {
+    let author = data[i].author,
+    avatar = data[i].avatar,
+    title = data[i].title,
+    link = data[i].link,
+    floor = data[i].floor,
+    created = data[i].created;
+    result +=
+    '<div class="col-12 mt-3"><div class="item-body flex-fill p-3"><div class="item-header d-flex mb-3"><div class="item-avatar mr-3" style="background-image:url('+ avatar +')"></div><div class="item-sub"><div class="item-creator">'+ author +'</div></div></div><div class ="item-content d-flex flex-fill flex-column"><div class="item-inner flex-fill my-2"><a href="'+link+'" target="_blank">'+ title+'</a></div><div class="item-footer d-flex mt-2"><div class="item-time item-tag d-flex align-items-center px-2 text-xs">'+created+'</div><div class="d-flex flex-fill justify-content-end"><div class="item d-flex align-items-center"><i class="iconfont iconthunderbolt"></i><span class="ml-1">'+floor+'</span></div></div></div></div></div></div>';
+  }
+  resultAll = result
+  linksDom.insertAdjacentHTML('beforeend', resultAll);
+}
 </script>
 <script type="text/javascript" src="https://npm.elemecdn.com/fcircle-theme-yyyz@1.0.13/dist/fcircle.min.js"></script>
 </div>
