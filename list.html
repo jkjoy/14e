@@ -102,7 +102,7 @@ function waterfall(t){function e(t,e){var n=window.getComputedStyle(e);return pa
 // 清单函数
 todolist();
 function todolist() {
-    fetch('https://cors.ow3.cn/https://ee.eeeeeeeeeeeeee.ee/api/v1/memo?creatorId=1&tag=清单').then(res => res.json()).then(data => { // 注意替换链接和ID
+    fetch('https://memos.loliko.cn/api/v1/memo?creatorId=1&tag=清单').then(res => res.json()).then(data => { // 注意替换链接和ID
         // 获取并处理数据
         data = data
         let box = document.getElementById('todolist')
