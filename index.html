@@ -15,17 +15,77 @@
   <meta property="og:url" content="https://eeeeeeeeeeeeee.ee/"/>
   <meta property="og:description" content="一个基于Memos实现的静态WEB网站"/>
   <link href="//blogcdn.loliko.cn/fontawesome/6.5.1/css/all.css" rel="stylesheet">
-<script crossorigin="anonymous" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" src="//lib.baomitu.com/jquery/1.12.4/jquery.min.js"></script>
-  <link href="https://unpkg.com/artalk@2.4.4/dist/Artalk.css" rel="stylesheet">
+  <link href="https://unpkg.com/artalk/dist/Artalk.css" rel="stylesheet">
 
 <!-- JS -->
-<script src="https://unpkg.com/artalk@2.4.4/dist/Artalk.js"></script>
+<script src="https://unpkg.com/artalk/dist/Artalk.js"></script>
 </head>
 <body class='page '>
-<div id="head"></div>
-<script type="text/javascript">
-    $('#head').load('./header.html');
-</script>
+  <div id="menu-main-mobile" class="menu-main-mobile">
+    <ul class="menu">
+                <li >
+                    <a href="./">首页</a>
+                </li>   
+                <li >
+                    <a href="./list.html">清单</a>
+                </li> 
+                <li >
+                    <a href="./photo.html">相册</a>
+                </li>                  
+                <li >
+                    <a href="./article.html">文章</a>
+                </li>
+                <li >
+                    <a href="./links.html">链接</a>
+                </li>
+                <li >
+                    <a href="./about.html">关于</a>
+                </li>                
+    </ul>
+</div>
+<div class="header-background">
+  <div class='header'>
+  <a href="/" class="header-logo">
+      <img src="https://q1.qlogo.cn/g?b=qq&nk=80116747&s=100" alt="qq"></img>
+  </a>
+  <a href="/" class="header-title">14E</a>
+  <div class="menu-main"> 
+    <div class="header-menu">
+      <a href="./">首页</a>
+    </div>
+    <div class="header-menu">
+      <a href="./list.html">清单</a>
+    </div>
+    <div class="header-menu">
+      <a href="./photo.html">照片</a>
+    </div>
+    <div class="header-menu">
+      <a href="./article.html">文章</a>
+    </div>
+    <div class="header-menu">
+      <a href="./links.html">链接</a>
+    </div>    
+    <div class="header-menu">
+      <a href="./about.html">关于</a>
+    </div>
+        <a href="https://jiong.us/@sun"  target="_blank"><i class="fa-brands fa-mastodon"></i></a>
+        <a href="https://jiong.us/@sun"  target="_blank"><i class="fa-brands fa-qq"></i></a>
+        <a href="https://github.com/jkjoy"  target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a href="https://jiong.us/@sun"  target="_blank"><i class="fa-brands fa-weixin"></i></a>
+   </div>
+   <div id="toggle-menu-main-mobile" class="hamburger-trigger">
+    <button class="hamburger">Menu</button>
+   </div>
+  </div>
+</div>
+<link rel="stylesheet" href="//cdn.09j.cn/lxgw-wenkai-webfont/style.css" />
+  <style>
+    body {
+      font-family: "LXGW WenKai", sans-serif;
+    }
+  </style>
+
+
 <div id="wrapper" class="wrapper">
 <script src="./js/moment.min.js?v=2.29.4"></script>
 <script src="./js/moment.twitter.min.js"></script>
@@ -58,16 +118,20 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 <script src="./js/coco-message.min.js"></script> 
 <script src="./js/marked.min.js"></script>  
 <script type="module" src="./js/bundle.js"></script> 
-<script async src="https://u.3.ow3.cn/script.js" data-website-id="9a77d135-b8c4-4d16-8066-9f16a84d11f2"></script>
-<div id="footer"></div>
-<script type="text/javascript">
-    $('#footer').load('./footer.html');
-</script>
-<script>
-  window.addEventListener('load', function() {
-  document.body.classList.add('loaded');
-});
-</script>
+ 
+<div class="footer-background">
+  <div class="footer">
+     <div class="footer-info">&copy; 2023 Memos </div>
+     <div class="githuab">
+       <a href="https://www.loliko.cn/blog/sitemap.xml" target="_blank" ><img class="header-rss" src="./img/rss.svg" alt="RSS" /></a>
+       <a href="mailto:jkjoy@126.com"><img class="header-rss" src="./img/email.svg" alt="E-mail" /></a>
+     </div> 
+  </div>
+<div class="gotop_hide">
+ <div class="gotop" onclick="smoothScrollTop()" id="gotop"><img src="./img/up.svg"  ></div>
+</div>
+</div>
+
 <script type="text/javascript" src="./js/bundle.min.ec26b59a00a2590684251feed454cb3affa248a483c1f9e342d419d474ef6451.js"></script>
 </div>  
 </body>
