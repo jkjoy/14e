@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>14E - Memos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./img/icon.png">
+  <link href="/index.xml" title="Memos" type="application/rss+xml">
+  <link rel="canonical" href="https://memos.im/" />
+  <link rel="stylesheet" href="./css/style.min.5bc838d16b2042ae0c75c504f0c3a16c2c4a4e762458778dea73d28a99cdafed.css">
+  <meta name="description" content=""/>
+  <meta property="og:title" content="Memos"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://eeeeeeeeeeeeee.ee/"/>
+  <meta property="og:description" content="一个基于Memos实现的静态WEB网站"/>
+  <link href="//blogcdn.loliko.cn/fontawesome/6.5.1/css/all.css" rel="stylesheet">
+  <link href="https://art.loliko.cn/dist/Artalk.css" rel="stylesheet">
+<script src="https://art.loliko.cn/dist/Artalk.js"></script>
+</head>
+<body class='page '>
+  <div id="menu-main-mobile" class="menu-main-mobile">
+    <ul class="menu">
+                <li >
+                    <a href="./">首页</a>
+                </li>   
+                <li >
+                    <a href="./list.html">清单</a>
+                </li> 
+                <li >
+                    <a href="./photo.html">相册</a>
+                </li>                  
+                <li >
+                    <a href="./article.html">文章</a>
+                </li>
+                <li >
+                    <a href="./links.html">链接</a>
+                </li>
+                <li >
+                    <a href="./about.html">关于</a>
+                </li>                
+    </ul>
+</div>
+<div class="header-background">
+  <div class='header'>
+  <a href="/" class="header-logo">
+      <img src="https://q1.qlogo.cn/g?b=qq&nk=80116747&s=100" alt="qq"></img>
+  </a>
+  <a href="/" class="header-title">14E</a>
+  <div class="menu-main"> 
+    <div class="header-menu">
+      <a href="./">首页</a>
+    </div>
+    <div class="header-menu">
+      <a href="./list.html">清单</a>
+    </div>
+    <div class="header-menu">
+      <a href="./photo.html">照片</a>
+    </div>
+    <div class="header-menu">
+      <a href="./article.html">文章</a>
+    </div>
+    <div class="header-menu">
+      <a href="./links.html">链接</a>
+    </div>    
+    <div class="header-menu">
+      <a href="./about.html">关于</a>
+    </div>
+        <a href="https://jiong.us/@sun"  target="_blank"><i class="fa-brands fa-mastodon"></i></a>
+        <a href="https://jiong.us/@sun"  target="_blank"><i class="fa-brands fa-qq"></i></a>
+        <a href="https://github.com/jkjoy"  target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a href="https://jiong.us/@sun"  target="_blank"><i class="fa-brands fa-weixin"></i></a>
+   </div>
+   <div id="toggle-menu-main-mobile" class="hamburger-trigger">
+    <button class="hamburger">Menu</button>
+   </div>
+  </div>
+</div>
+<link rel="stylesheet" href="//cdn.09j.cn/lxgw-wenkai-webfont/style.css" />
+  <style>
+    body {
+      font-family: "LXGW WenKai", sans-serif;
+    }
+  </style>
+
+
+<div id="wrapper" class="wrapper">
+<script src="./js/moment.min.js?v=2.29.4"></script>
+<script src="./js/moment.twitter.min.js"></script>
+<script>
+function formatDate(param) {
+if(typeof param === 'number') {
+     param = new Date(param * 1000).toISOString();
+  }
+return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
+}
+</script>   
+<div class="memos-header">
+<div class="intro">
+</div>
+<div class="pagetitle">#<span class="bb-load"></span></div>
+<div id="memos" class="img-hide"></div>
+</div>
+<div id="bber"></div>
+<script type="text/javascript">
+  var bbMemos = {
+    memos : 'https://memos.loliko.cn/',
+    limit : '30',
+    creatorId:'1' ,
+    domId: '',
+  }
+</script>
+<script src="./js/view-image.min.js"></script>  
+<script src="./js/memos.js?v=0.0.1"></script>
+<script src="./js/memos-editor.js?"></script>
+<script src="./js/coco-message.min.js"></script> 
+<script src="./js/marked.min.js"></script>  
+<script type="module" src="./js/bundle.js"></script> 
+ 
+<div class="footer-background">
+  <div class="footer">
+     <div class="footer-info">&copy; 2024 Memos </div>
+     <div class="githuab">
+       <a href="https://www.imsun.org/sitemap.xml" target="_blank" ><img class="header-rss" src="./img/rss.svg" alt="RSS" /></a>
+       <a href="mailto:jkjoy@126.com"><img class="header-rss" src="./img/email.svg" alt="E-mail" /></a>
+     </div> 
+  </div>
+<div class="gotop_hide">
+ <div class="gotop" onclick="smoothScrollTop()" id="gotop"><img src="./img/up.svg"  ></div>
+</div>
+</div>
+
+<script type="text/javascript" src="./js/bundle.min.ec26b59a00a2590684251feed454cb3affa248a483c1f9e342d419d474ef6451.js"></script>
+</div>  
+</body>
+</html>

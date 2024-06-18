@@ -1,136 +1,319 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>14E - Memos</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="./img/icon.png">
-  <link href="/index.xml" title="Memos" type="application/rss+xml">
-  <link rel="canonical" href="https://memos.im/" />
-  <link rel="stylesheet" href="./css/style.min.5bc838d16b2042ae0c75c504f0c3a16c2c4a4e762458778dea73d28a99cdafed.css">
-  <meta name="description" content=""/>
-  <meta property="og:title" content="Memos"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://eeeeeeeeeeeeee.ee/"/>
-  <meta property="og:description" content="一个基于Memos实现的静态WEB网站"/>
-  <link href="//blogcdn.loliko.cn/fontawesome/6.5.1/css/all.css" rel="stylesheet">
-  <link href="https://art.loliko.cn/dist/Artalk.css" rel="stylesheet">
-<script src="https://art.loliko.cn/dist/Artalk.js"></script>
-</head>
-<body class='page '>
-  <div id="menu-main-mobile" class="menu-main-mobile">
-    <ul class="menu">
-                <li >
-                    <a href="./">首页</a>
-                </li>   
-                <li >
-                    <a href="./list.html">清单</a>
-                </li> 
-                <li >
-                    <a href="./photo.html">相册</a>
-                </li>                  
-                <li >
-                    <a href="./article.html">文章</a>
-                </li>
-                <li >
-                    <a href="./links.html">链接</a>
-                </li>
-                <li >
-                    <a href="./about.html">关于</a>
-                </li>                
-    </ul>
-</div>
-<div class="header-background">
-  <div class='header'>
-  <a href="/" class="header-logo">
-      <img src="https://q1.qlogo.cn/g?b=qq&nk=80116747&s=100" alt="qq"></img>
-  </a>
-  <a href="/" class="header-title">14E</a>
-  <div class="menu-main"> 
-    <div class="header-menu">
-      <a href="./">首页</a>
-    </div>
-    <div class="header-menu">
-      <a href="./list.html">清单</a>
-    </div>
-    <div class="header-menu">
-      <a href="./photo.html">照片</a>
-    </div>
-    <div class="header-menu">
-      <a href="./article.html">文章</a>
-    </div>
-    <div class="header-menu">
-      <a href="./links.html">链接</a>
-    </div>    
-    <div class="header-menu">
-      <a href="./about.html">关于</a>
-    </div>
-        <a href="https://jiong.us/@sun"  target="_blank"><i class="fa-brands fa-mastodon"></i></a>
-        <a href="https://jiong.us/@sun"  target="_blank"><i class="fa-brands fa-qq"></i></a>
-        <a href="https://github.com/jkjoy"  target="_blank"><i class="fa-brands fa-github"></i></a>
-        <a href="https://jiong.us/@sun"  target="_blank"><i class="fa-brands fa-weixin"></i></a>
-   </div>
-   <div id="toggle-menu-main-mobile" class="hamburger-trigger">
-    <button class="hamburger">Menu</button>
-   </div>
-  </div>
-</div>
-<link rel="stylesheet" href="//cdn.09j.cn/lxgw-wenkai-webfont/style.css" />
-  <style>
-    body {
-      font-family: "LXGW WenKai", sans-serif;
-    }
-  </style>
-
-
-<div id="wrapper" class="wrapper">
-<script src="./js/moment.min.js?v=2.29.4"></script>
-<script src="./js/moment.twitter.min.js"></script>
-<script>
-function formatDate(param) {
-if(typeof param === 'number') {
-     param = new Date(param * 1000).toISOString();
-  }
-return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
+<meta charset="UTF-8">
+<title>Memos Display</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jkjoy/memos/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jkjoy/memos/css/uno.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+<script src="https://cdn.staticfile.org/twikoo/1.6.36/twikoo.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />    
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<link rel="stylesheet" href="https://cdn.imsun.org/lxgw-wenkai-screen-webfont/lxgwwenkaigbscreen.css" />
+<style>
+div pre code {
+  /* 迫使文字断行 */
+  white-space: pre-wrap; /* CSS3 */
+  word-wrap: break-word; /* 老版本的浏览器 */
+  overflow-wrap: break-word;  
+  /* 指定如何断行 */
+  word-break: break-all;  
+  word-break: break-word;  
 }
-</script>   
-<div class="memos-header">
-<div class="intro">
-</div>
-<div class="pagetitle">#<span class="bb-load"></span></div>
-<div id="memos" class="img-hide"></div>
-</div>
-<div id="bber"></div>
-<script type="text/javascript">
-  var bbMemos = {
-    memos : 'https://memos.loliko.cn/',
-    limit : '30',
-    creatorId:'1' ,
-    domId: '',
+div p a {
+    word-break: break-all;  
+    word-break: break-word;  
+}
+.thumbnail-image {
+    width:100%;
+    align-items: center; 
+    justify-content: center;
+    overflow: hidden;
+    border-radius:4px;
+    transition:transform .3s ease;
+    cursor:zoom-in;
+}
+.resimg {
+    display: grid;
+    column-gap: 3px; 
+    row-gap: 3px;
+}
+.thumbnail-image img {
+    width:100%;
+    height:120px;
+    object-fit:cover;
+    }
+.resimg.grid-1 img {
+    width: 290px;
+    height: 380px;
+}
+.resimg.grid-2 img {
+    width: 100%;
+    height: 210px;
+}
+.resimg.grid-3 img {
+    width: 100%;
+    height: 160px;
+}
+.container {
+  position: relative; /* 设置父容器为相对定位 */
+  width: 100%; /* 容器宽度 */
+  height: 300px; /* 控制容器高度 */
+  overflow: auto; /* 如果内容溢出容器，显示滚动条 */
+}
+.item {
+  display: inline-block; /* 设置为行内块元素以便横向排列 */
+  position: relative; /* 相对定位，使其能够使用top/bottom和left/right定位 */
+  margin-left: -100%; /* 初始化外边距为负的容器宽度，以便从右侧开始排列 */
+  margin-top: 10px; /* 如果需要的话，设置元素间的上边距 */
+}
+.container::before {
+  /* 使用 ::before 伪元素占位，推动所有 .item 向上排列 */
+  content: "";
+  display: inline-block;
+  vertical-align: bottom; /* 对齐至底部，确保 .item 从底部开始 */
+  height: 100%; /* 伪元素的高度和容器一致 */
+  width: 0;
+}  
+.load-more-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #FFFFFF;
+      color: rgb(35, 32, 32);
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
   }
-</script>
-<script src="./js/view-image.min.js"></script>  
-<script src="./js/memos.js?v=0.0.1"></script>
-<script src="./js/memos-editor.js?"></script>
-<script src="./js/coco-message.min.js"></script> 
-<script src="./js/marked.min.js"></script>  
-<script type="module" src="./js/bundle.js"></script> 
- 
-<div class="footer-background">
-  <div class="footer">
-     <div class="footer-info">&copy; 2024 Memos </div>
-     <div class="githuab">
-       <a href="https://www.imsun.org/sitemap.xml" target="_blank" ><img class="header-rss" src="./img/rss.svg" alt="RSS" /></a>
-       <a href="mailto:jkjoy@126.com"><img class="header-rss" src="./img/email.svg" alt="E-mail" /></a>
-     </div> 
-  </div>
-<div class="gotop_hide">
- <div class="gotop" onclick="smoothScrollTop()" id="gotop"><img src="./img/up.svg"  ></div>
-</div>
-</div>
+  .load-more-btn:hover {
+      background-color: #f7f8fb;
+  }
+.main-container {
+    max-width: 100%;
+      padding: 0 0px;
+  }
+@media (min-width: 768px) {
+      .main-container {
+          max-width: 567px;
+      }
+      .resimg.grid-2 img {
+        height: 210px;
+    }
+      .resimg.grid-3 img {
+         height: 150px;
+      }
+}
+/*小屏设备*/
+@media (min-width: 374px) and (max-width: 567px) {
+    .main-container {
+        max-width: 100%;
+    }
+    .resimg.grid-2 img {
+        height: 150px;
+    }
+    .resimg.grid-3 img {
+        height: 120px;
+    }
+}
+.top {
+        position: relative;
+        height: 300px;
+        background-color: #333;
+        color: white;
+        text-align: center;
+        line-height: 200px; /* 垂直居中 */
+        background-image: url('https://cdnjs.sgcd.net/350.jpg');
+        background-position: center;
+    }
+.top-1 {
+        position: absolute;
+        bottom: -40px;
+        right: 40px;
+        padding: 10px;
+        border-radius: 5px;
+      
+    }
+.top img {
+        position: absolute;
+        bottom: 20px;
+        left: 10px;
+        width: 64px;
+        height: 64px;
+       /*  border-radius: 50%; 变成圆形*/
+    }
+.top-1, .top-2 {
+        padding: 10px;
+        border-radius: 5px;
+        color: rgb(7, 7, 7);
+        margin-right: 20px; /* 添加间距 */
+    }
+.top-2 {
+        position: absolute;
+        bottom: -100px;
+        right: 40px;
+        padding: 10px;
+        border-radius: 5px;      
+}
+.nav-links .loadmore {
+    border: 1px solid ;
+    cursor: pointer;
+    position: relative;
+    padding: 5px 30px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+</style> 
+</head>
+<body>
+    <div class="bg-[#f0f0f0]">
+        <div> 
+            <div class="bg-white mx-auto main-container">
+                <header class="top">
+                    <div class="fixed top-0 left-0 w-full h-14 z-9">
+                        <div class="main-container mx-auto flex flex-row justify-between h-full transition-all duration-300" id="top-fixed">
+                            <div class="flex items-center">
+                               <span class="h-full px-5 flex items-center">  </span>
+                            </div>
+                            <div class="flex items-center">
+                                 <span class="h-full px-5 flex items-center">  </span>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="top-1">
+                            <div class="flex flex-row items-end">
+                                    <a href="/"> <img src="https://img.imsun.org/avatar.jpg" /></a>
+                            </div>
+                        </div>
+                        <div class="top-2"> 
+                            <div class="flex flex-row items-end">浪子</div>  
+                        </div>
+                </header>
+                <div class="article-container">
+                    <div id="memos-container"></div>
+                    <div class="nav-links">
+                    <button id="load-more" class="load-more-btn">加载更多</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+window.onload = function() {
+    let offset = 0; // 初始偏移量
+    const limit = 10; // 每次加载的数量
 
-<script type="text/javascript" src="./js/bundle.min.ec26b59a00a2590684251feed454cb3affa248a483c1f9e342d419d474ef6451.js"></script>
-</div>  
+    function formatHTML(memosData) {
+        let htmlString = '';
+        memosData.forEach(memo => {
+            const { content, resources, uid, createTime } = memo;
+            let resourceElement = ''; // 初始化资源相关HTML为空字符串
+            let imageCount = 0; // 记录图片数量
+
+            // 尝试从memo内容中匹配图片URL
+            const imageUrlMatch = content.match(/\((https?.+?\.(?:jpeg|jpg|gif|png))\)/i);
+            let imageUrl = "";
+            if (imageUrlMatch && imageUrlMatch.length > 1) {
+                imageUrl = imageUrlMatch[1];
+                resourceElement += `<a href="${imageUrl}" target="_blank"><img src="${imageUrl}" data-fancybox="img" class="thumbnail-image img"></a>`;
+                imageCount++;
+            }
+
+            if (resources && resources.length > 0) {
+                resources.forEach(resource => {
+                    if (resource.externalLink && !imageUrl) { // 如果已经找到图片URL，则跳过
+                        // 检查链接是否为图片文件
+                        if (/\.(jpeg|jpg|gif|png|bmp|webp)/i.test(resource.externalLink)) {
+                            // 是图片资源，创建图片标签
+                            resourceElement += `<a href="${resource.externalLink}" target="_blank"><img src="${resource.externalLink}" data-fancybox="img" class="thumbnail-image img"></a>`;
+                            imageCount++;
+                        } else {
+                            // 不是图片资源，创建超链接标签
+                            resourceElement += `<a href="${resource.externalLink}" target="_blank">点击下载</a>`;
+                        }
+                    }
+                });
+            }
+
+            // 根据图片数量设置CSS类
+            let gridClass = '';
+            if (imageCount === 1) {
+                gridClass = 'grid-1';
+            } else if (imageCount > 1 && imageCount < 3) {
+                gridClass = 'grid-2 grid-cols-2';
+            } else if (imageCount >= 3 && imageCount < 10) {
+                gridClass = 'grid-3 grid-cols-3';
+            }
+
+            // 使用 marked 转换 markdown 内容为 HTML
+            const htmlContent = marked.parse(content.replace(/#(.*?)\s/g, '') // 移除井号到空白字符的内容
+                .replace(/\!?\[(.*?)\]\((.*?)\)/g, '') // 移除Markdown风格的链接或图片
+            ); // 移除花括号内的内容
+            
+            // 创建 memo HTML 字符串，包括图片和内容
+            htmlString += `
+                <article class="flex flex-row border-b border-b-2 dark:border-gray-800 border-gray-200 pt-5 pl-5 pr-5">
+                    <div class="mr-3">
+                        <div class="w-9 h-9">
+                            <img src="https://img.imsun.org/avatar.jpg" class="w-9 h-9 object-cover rounded-lg preview-image" />
+                        </div>
+                    </div>
+                    <div class="w-full border-t-0 border-l-0 border-r-0 border-b-1 dark:border-gray-800 border-gray-100 border-solid pb-1">
+                        <section class="flex flex-row justify-between items-center mb-1">
+                            <span class="text-color-link cursor-default text-[14px]">
+                                <a href="https://memos.ee/u/jkjoy" target="_blank" class="cursor-pointer text-color-link no-underline">浪子</a>
+                            </span>
+                        </section>
+                        <section class="mb-1 cursor-default break-all line-clamp">
+                            <p>${htmlContent}</p>
+                            <div class="resimg ${gridClass}">${resourceElement}</div>
+                            <div class="flex flex-row justify-between items-center text-gray text-xs">
+                                <a href="https://memos.ee/m/${uid}" target="_blank" class="cursor-pointer text-color-link no-underline">${new Date(createTime).toLocaleString()}</a>
+                                <a href="https://memos.ee/m/${uid}" target="_blank" class="cursor-pointer text-color-link no-underline"> <span class="cursor-pointer" id="commentTrigger"> ••</span></a>
+                            </div>
+                        </section>
+                    </div>
+                </article>`;
+        });
+        return htmlString;
+    }
+
+    function fetchMemos() {
+        return fetch('https://bbapi.memos.ee')
+            .then(response => response.json())
+            .then(data => data.memos)
+            .catch(error => {
+                console.error('Error fetching memos:', error);
+                return [];
+            });
+    }
+
+    function fetchAndDisplayMemos() {
+        fetchMemos().then(data => {
+            const memosContainer = document.getElementById('memos-container');
+            const memosToShow = data.slice(offset, offset + limit); // 选择要显示的memos
+            memosContainer.innerHTML += formatHTML(memosToShow);
+            offset += limit; // 更新偏移量
+            // 如果没有更多的memos，隐藏“加载更多”按钮
+            if (offset >= data.length) {
+                document.getElementById('load-more').style.display = 'none';
+            }
+        });
+    }
+
+    // 在页面加载完成后获取并展示 memos
+    fetchAndDisplayMemos();
+
+    // 绑定“加载更多”按钮的点击事件
+    document.getElementById('load-more').addEventListener('click', fetchAndDisplayMemos);
+
+    // Fancybox 初始化
+    Fancybox.bind("[data-fancybox]", {
+        // Your custom options
+    });
+};
+
+
+</script>         
 </body>
 </html>
