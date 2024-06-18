@@ -279,7 +279,7 @@ window.onload = function() {
     }
 
     function fetchMemos() {
-        return fetch('https://bbapi.memos.ee')
+        return fetch('https://memos.jkjoy.cn/memos.json')
             .then(response => response.json())
             .then(data => data.memos)
             .catch(error => {
