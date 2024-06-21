@@ -222,14 +222,15 @@ window.onload = function() {
             if (resources && resources.length > 0) {
                 resources.forEach(resource => {
                     if (resource.externalLink && !imageUrl) { // 如果已经找到图片URL，则跳过
+                        let cleanedLink = resource.externalLink.replace(/(\.(jpeg|jpg|gif|png|bmp|webp)).*$/i, '$1');
                         // 检查链接是否为图片文件
-                        if (/\.(jpeg|jpg|gif|png|bmp|webp)/i.test(resource.externalLink)) {
+                        if (/\.(jpeg|jpg|gif|png|bmp|webp)/i.test(cleanedLink)) {
                             // 是图片资源，创建图片标签
-                            resourceElement += `<a href="${resource.externalLink}" target="_blank"><img src="${resource.externalLink}" data-fancybox="img" class="thumbnail-image img"></a>`;
+                            resourceElement += `<a href="${cleanedLink}" target="_blank"><img src="${cleanedLink}" data-fancybox="img" class="thumbnail-image img"></a>`;
                             imageCount++;
                         } else {
                             // 不是图片资源，创建超链接标签
-                            resourceElement += `<a href="${resource.externalLink}" target="_blank">点击下载</a>`;
+                            resourceElement += `<a href="${cleanedLink}" target="_blank">点击下载</a>`;
                         }
                     }
                 });
