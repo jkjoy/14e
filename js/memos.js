@@ -89,7 +89,7 @@ fetch(bbUrl).then(res => res.json()).then( resdata =>{
   }
   //在未展开评论时，默认显示评论数
   Artalk.loadCountWidget({
-    server: 'https://art.loliko.cn/',
+    server: 'https://artalk.loliko.cn/',
     site: '14e', 
     countEl: '#ArtalkCount'
   });
@@ -224,7 +224,7 @@ function updateHTMl(data){
   resultAll = bbBefore + result + bbAfter;
   bbDom.insertAdjacentHTML('beforeend', resultAll);
 
-  animateSummaries(); // 在DOM加载完毕后执行滑动加载动画
+ // animateSummaries(); // 在DOM加载完毕后执行滑动加载动画
 
   if(document.querySelector('button.button-load')) document.querySelector('button.button-load').textContent = '看更多 ...';
 }
@@ -248,7 +248,7 @@ function getTagNow(e){
 
   //在未展开评论时，默认显示评论数
   Artalk.loadCountWidget({
-    server: 'https://art.loliko.cn/',
+    server: 'https://artalk.loliko.cn/',
     site: '14e', 
     countEl: '#ArtalkCount'
   });
@@ -348,7 +348,7 @@ function loadArtalk(memo_id) {
       el: '#memo_' + memo_id,
       pageKey: '/m/' + memo_id,
       pageTitle: '',
-      server: 'https://art.loliko.cn/',
+      server: 'https://artalk.loliko.cn/',
       site: '14e',
       darkMode: 'auto'
     });
