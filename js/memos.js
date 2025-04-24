@@ -8,10 +8,11 @@ var bbMemo = {
   creatorId: '1',
   domId: '#bber',
 };
-if(typeof(bbMemos) !=="undefined"){
-  for(var key in bbMemos) {
-    if(bbMemos[key]){
-      bbMemo[key] = bbMemos[key];
+// Allow configuration override from global bbMemos object if it exists
+if(window.bbMemos && typeof window.bbMemos === 'object'){
+  for(var key in window.bbMemos) {
+    if(window.bbMemos.hasOwnProperty(key) && window.bbMemos[key]){
+      bbMemo[key] = window.bbMemos[key];
     }
   }
 }
@@ -255,27 +256,31 @@ function loadArtalk(memo_id) {
         behavior: 'smooth'
       });
     } else {
-    }
-    if (typeof Artalk !== 'undefined') {
-      if (typeof ArtalkLite !== 'undefined') {
-        new ArtalkLite({
-          el: '#memo_' + memo_id,
-          pageKey: '/m/' + memo_id,
-          server: 'https://artalk.loliko.cn/',
-          site: '14e',
-          darkMode: 'auto'
-        });
-      } else {
-        new Artalk({
-          el: '#memo_' + memo_id,
-          pageKey: '/m/' + memo_id,
-          server: 'https://artalk.loliko.cn/',
-          site: '14e',
-          darkMode: 'auto'
-        });
+    if (typeof Artalk === 'function') {
+      try {
+        if (typeof ArtalkLite === 'function') {
+          new ArtalkLite({
+            el: '#memo_' + memo_id,
+            pageKey: '/m/' + memo_id,
+            server: 'https://artalk.loliko.cn/',
+            site: '14e',
+            darkMode: 'auto'
+          });
+        } else {
+          new Artalk({
+            el: '#memo_' + memo_id,
+            pageKey: '/m/' + memo_id,
+            server: 'https://artalk.loliko.cn/',
+            site: '14e',
+            darkMode: 'auto'
+          });
+        }
+      } catch (error) {
+        console.error('Error initializing Artalk:', error);
       }
     } else {
       console.error('Artalk is not loaded or is not a constructor');
+    }
     }
   } else {
     commentDiv.classList.add('hidden');
