@@ -22,9 +22,7 @@
                     <li >
                         <a href="./">首页</a>
                     </li>   
-                    <li >
-                        <a href="./list.html">清单</a>
-                    </li> 
+ 
                     <li >
                         <a href="./photo.html">相册</a>
                     </li>                  
@@ -49,9 +47,7 @@
         <div class="header-menu">
           <a href="./">首页</a>
         </div>
-        <div class="header-menu">
-          <a href="./list.html">清单</a>
-        </div>
+ 
         <div class="header-menu">
           <a href="./photo.html">照片</a>
         </div>
@@ -65,9 +61,7 @@
           <a href="./about.html">关于</a>
         </div>
             <a href="https://jiong.us/@sun"  target="_blank"><i class="fa-brands fa-mastodon"></i></a>
-            <a href="https://jiong.us/@sun"  target="_blank"><i class="fa-brands fa-qq"></i></a>
             <a href="https://github.com/jkjoy"  target="_blank"><i class="fa-brands fa-github"></i></a>
-            <a href="https://jiong.us/@sun"  target="_blank"><i class="fa-brands fa-weixin"></i></a>
        </div>
        <div id="toggle-menu-main-mobile" class="hamburger-trigger">
         <button class="hamburger">Menu</button>
@@ -75,144 +69,11 @@
       </div>
     </div>
        
-    <link rel="stylesheet" href="https://cdn.imsun.org/Yozai-Medium/result.css" /> 
-    <style>
-        body {
-          font-family: "Yozai Medium", sans-serif;
-        }
-    </style>
-      
+ 
     
 <div id="wrapper" class="wrapper">    
-<div class="memos-header">
-<div class="intro">
-    <div class='load-memos-editor'>链接</div>
-</div>
-<div class="pagetitle"># 友情链接 </div>
-<div id="memos" class="img-hide"></div>
-<div class="memos-search-all img-hide visible">  
-<div id="links">
-<div id="links-container"></div>
-<div class="clear"></div>
-<style>
-        .clear {
-         clear: both;
-         }
-         .links-content{
-         margin-top:1rem;
-         }
-         .link-navigation::after {
-         content: " ";
-         display: block;
-         clear: both;
-         }
-         .card {
-         width: 40%;
-         font-size: 1rem;
-         padding: 10px 20px;
-         border-radius: 4px;
-         transition-duration: 0.15s;
-         margin-bottom: 1rem;
-         display:flex;
-         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-         }
-         .card:nth-child(odd) {
-         float: left;
-         }
-         .card:nth-child(even) {
-         float: right;
-         }
-         .card:hover {
-         transform: scale(1.1);
-         box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
-         }
-         .card a {
-         border:none;
-         }
-         .card .gatus {
-         float: left;
-         }
-         .card .ava {
-         width: 7rem!important;
-         height: 5rem!important;
-         margin:0!important;
-         margin-right: 1em!important;
-         border-radius:0.2rem;
-         }
-         .card .card-header {
-         font-style: italic;
-         overflow: hidden;
-         width: 100%;
-         }
-         .card .card-header a {
-         font-style: normal;
-         color: #2bbc8a;
-         font-weight: bold;
-         text-decoration: none;
-         }
-         .card .card-header a:hover {
-         color: #d480aa;
-         text-decoration: none;
-         }
-         .card .card-header .info {
-         font-style:normal;
-         color:#a3a3a3;
-         font-size:14px;
-         min-width: 0;
-         overflow: hidden;
-         white-space: nowrap;
-         }
-      @media screen and (max-width: 768px) {
-      .card{
-       width: 90%;
-  }
-}
-</style>
-<script>
-    var linksContainer = document.getElementById('links-container');
-    // 通过 AJAX 或 Fetch 获取远程 JSON 数据
-    fetch('https://sunsimecn-1251893119.cos.ap-beijing-1.myqcloud.com/imsun.json')
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(jsonData) {
-        var linkList = jsonData.link_list;
-        for (var i = 0; i < linkList.length; i++) {
-          var linkContainer = document.createElement('div');
-          linkContainer.classList.add('card');
-          var avatar = document.createElement('img');
-          avatar.classList.add('ava');
-          avatar.src = linkList[i].avatar;
-          avatar.alt = linkList[i].name;
-          var cardHeader = document.createElement('div');
-          cardHeader.classList.add('card-header');
-          var link = document.createElement('a');
-          link.href = linkList[i].link;
-          link.textContent = linkList[i].name;
-          link.target = '_blank';
-          var description = document.createElement('div');
-          description.classList.add('info');
-          description.textContent = linkList[i].descr;
-          var gatus = document.createElement('img');
-          gatus.classList.add('gatus');
-          gatus.src = linkList[i].gatus;
-          var innerDiv1 = document.createElement('div');
-          innerDiv1.appendChild(link);
-          var innerDiv2 = document.createElement('div');
-          innerDiv2.appendChild(innerDiv1);
-          innerDiv2.appendChild(description);
-          innerDiv2.appendChild(gatus);
-          cardHeader.appendChild(innerDiv2);
-          linkContainer.appendChild(avatar);
-          linkContainer.appendChild(cardHeader);
-          linksContainer.appendChild(linkContainer);
-        }
-      })
-      .catch(function(error) {
-        console.log('Error:', error);
-      });
-</script>
-</div>
+ 
+ 
 </div>
 <script src="./js/marked.min.js"></script>
 <script src="./js/coco-message.min.js"></script>
