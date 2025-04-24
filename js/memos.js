@@ -259,25 +259,17 @@ function loadArtalk(memo_id) {
     
     // Initialize Artalk comments
     try {
-      if (typeof ArtalkLite !== 'undefined') {
-        new ArtalkLite({
-          el: '#memo_' + memo_id,
-          pageKey: '/m/' + memo_id,
-          server: 'https://artalk.loliko.cn/',
-          site: '14e',
-          darkMode: 'auto'
-        });
-      } else if (typeof Artalk !== 'undefined') {
-        new Artalk({
-          el: '#memo_' + memo_id,
-          pageKey: '/m/' + memo_id,
-          server: 'https://artalk.loliko.cn/',
-          site: '14e',
-          darkMode: 'auto'
-        });
-      } else {
-        console.error('Artalk is not loaded');
-      }
+          if (typeof window.Artalk !== 'undefined') {
+            window.Artalk.init({
+              el: '#memo_' + memo_id,
+              pageKey: '/m/' + memo_id,
+              server: 'https://artalk.loliko.cn/',
+              site: '14e',
+              darkMode: 'auto'
+            });
+          } else {
+            console.error('Artalk is not loaded - please ensure Artalk script is included');
+          }
     } catch (error) {
       console.error('Error initializing Artalk:', error);
     }
