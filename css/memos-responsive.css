@@ -12,3 +12,10 @@
         margin-bottom: 20px;
     }
 }
+/* 确保在大于900px时也能显示 */
+@media (min-width: 701px) {
+    .bb-list-li {
+        width: 100%;
+        max-width: 800px;
+    }
+}
