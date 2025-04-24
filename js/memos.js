@@ -1,5 +1,3 @@
-var hasLogin = 0 //没登录隐藏编辑归档按钮
-
 var memosData = {
     dom:'#memos',
 	}
@@ -31,10 +29,6 @@ var memos = bbMemo.memos
 var mePage = 1,offset = 0,nextLength = 0,nextDom='';
 var bbDom = document.querySelector(bbMemo.domId);
 var load = '<div class="bb-load"><button class="load-btn button-load">加载中……</button></div>'
-// 增加memos编辑及归档
-var memosOpenId = window.localStorage && window.localStorage.getItem("memos-access-token");
-var memosPath = window.localStorage && window.localStorage.getItem("memos-access-path");
-var getEditor = window.localStorage && window.localStorage.getItem("memos-editor-display");
 
 if(bbDom){
 getFirstList() //首次加载数据
@@ -52,16 +46,8 @@ btn.addEventListener("click", function () {
 }
 function getFirstList(){
 bbDom.insertAdjacentHTML('afterend', load);
-let tagHtml = `<div class="memos-search-all img-hide">
-<div class="memos-search">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-auto opacity-30 dark:text-gray-200"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
-<input type="text" id="memos-search-input" placeholder="输入关键词，搜索唠叨..." onkeydown="searchMemoevent(event)">
-</div>
-<div id="tag-list-all"></div>
-</div>
-<div id="tag-list"></div>` // TAG筛选 memos搜索
+let tagHtml = ``
 bbDom.insertAdjacentHTML('beforebegin', tagHtml); // TAG筛选
-showTaglist(); // 显示所有 TAG
 var bbUrl = memos+"api/v1/memo?creatorId="+bbMemo.creatorId+"&rowStatus=NORMAL&limit="+limit;
 fetch(bbUrl).then(res => res.json()).then( resdata =>{
   updateHTMl(resdata);
@@ -111,10 +97,6 @@ function meNums() {
 // 插入 html 
 function updateHTMl(data){
   var result="",resultAll="";
-  //登录显示编辑归档按钮
-  if(memosOpenId && getEditor == "show"){ 
-    hasLogin = 1
-  } 
   const TAG_REG = /#([^#\s!.,;:?"'()]+)(?= )/g
   , IMG_REG = /\!\[(.*?)\]\((.*?)\)/g //content 内 md 格式图片
   , LINK_REG = /\[(.*?)\]\((.*?)\)/g //链接新窗口打开
@@ -154,7 +136,7 @@ function updateHTMl(data){
           return '<div class="memos-tag-dg" onclick="getTagNow(this)"># ' + tagText + '</div>';
         }).join('');
       } else {
-        memosTag = '<div class="memos-tag-dg"># 日常</div> ';
+        memosTag = '<div class="memos-tag-dg">#日常</div> ';
       }
       
       //解析内置资源文件
@@ -192,21 +174,10 @@ function updateHTMl(data){
       <li class="bb-list-li img-hide" id="${memo_id}">
         <div class="memos-pl">
         <div class="memos_diaoyong_time">${moment(data[i].createdTs * 1000).twitterLong()}</div>
-        ${hasLogin == 0 ? '' : `
-        <div class="memos-edit">
-         <div class="memos-menu">...</div>
-         <div class="memos-menu-d">
-         <div class="edit-btn" onclick="editMemo(${JSON.stringify(data[i]).replace(/"/g, '&quot;')})">修改</div>
-         <div class="archive-btn" onclick="archiveMemo('${data[i].id}')">归档</div>
-         <div class="delete-btn" onclick="deleteMemo('${data[i].id}')">删除</div> 
-          </div>
-          </div>
-        `}
         </div>
-        <div class="memos-tag-wz">${memosTag}</div>
         <div class="datacont" view-image>${bbContREG}</div>
         <div class="memos_diaoyong_top">
-        <div class="memos-zan"><emoji-reaction class="reactions" reactTargetId="/m/${memo_id}" theme="system" endpoint="https://14.0tz.top" availableArrayString="👍,thumbs-up;🎉,party-popper;😄,smile-face;😎,cool;"></emoji-reaction></div>
+        <div class="memos-tag-wz">${memosTag}</div>
         <div class="talks_comments">
             <a onclick="loadArtalk('${memo_id}')">
               <span id="ArtalkCount" data-page-key="/m/${memo_id}" class="comment-s"></span> 条评论  <span id="btn_memo_${memo_id}">
@@ -223,9 +194,6 @@ function updateHTMl(data){
   var bbAfter = "</ul></section>";
   resultAll = bbBefore + result + bbAfter;
   bbDom.insertAdjacentHTML('beforeend', resultAll);
-
- // animateSummaries(); // 在DOM加载完毕后执行滑动加载动画
-
   if(document.querySelector('button.button-load')) document.querySelector('button.button-load').textContent = '看更多 ...';
 }
 
@@ -253,57 +221,6 @@ function getTagNow(e){
     countEl: '#ArtalkCount'
   });
   })
-}
-
-// 显示所有 TAG
-function showTaglist(){
-  let bbUrl = './js/tags.json'
-  let tagListDom = ""
-  fetch(bbUrl).then(res => res.json()).then( resdata =>{
-    for(let i=0;i < resdata.length;i++){
-      tagListDom += `<div class="memos-tag-all img-hide" onclick='getTagNow(this)'># ${resdata[i]}</div>`
-    }
-    document.querySelector('#tag-list-all').innerHTML = tagListDom
-
-    animateSummaries(); // 加载完毕后执行滑动加载动画
-  })
-}
-
-// 搜索 Memos
-function searchMemoevent(event) {
-  if (event.key === "Enter") {
-      searchMemo();
-  }
-}
-
-function searchMemo() {
-  let searchText = document.querySelector('#memos-search-input').value;
-  let tagHtmlNow = `<div class='memos-tag-sc-2' onclick='javascript:location.reload();'><div class='memos-tag-sc-1' >关键词搜索:</div><div class='memos-tag-sc' >${searchText}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-auto ml-1 opacity-40"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></div></div>`
-  document.querySelector('#tag-list').innerHTML = tagHtmlNow;
-  let bbUrl = memos + "api/v1/memo?creatorId=" + bbMemo.creatorId + "&content=" + searchText + "&limit=20";
-  fetchMemoDOM(bbUrl);
-}
-
-function fetchMemoDOM(bbUrl) {
-  fetch(bbUrl)
-    .then(res => res.json())
-    .then(resdata => {
-      let arrData = resdata || '';
-      if (resdata.data) {
-        arrData = resdata.data;
-      }
-      if (arrData.length > 0) {
-        // 清空旧的搜索结果和加载按钮
-        document.querySelector(bbMemo.domId).innerHTML = "";
-        if (document.querySelector("button.button-load")) {
-          document.querySelector("button.button-load").remove();
-        }
-        updateHTMl(resdata);
-      } else {
-        alert("搜不到，尝试换一个关键词");
-        setTimeout(() => location.reload(), 1000);
-      }
-    });
 }
 
 //增加memos评论
@@ -334,15 +251,11 @@ function loadArtalk(memo_id) {
     const commentLiPosition = commentLi.getBoundingClientRect().top + window.pageYOffset;
     const offset = commentLiPosition - 3.5 * parseFloat(getComputedStyle(document.documentElement).fontSize);
     if ('scrollBehavior' in document.documentElement.style) {
-      // 支持平滑滚动的情况下，使用 window.scrollTo
       window.scrollTo({
         top: offset,
         behavior: 'smooth'
       });
     } else {
-      // 不支持平滑滚动的情况下，使用滚动容器的平滑滚动方法（如需要滚动到具体的容器内）
-      // 例如：document.documentElement.scrollTop = offset;
-      // 或者使用第三方的平滑滚动库
     }
     const artalk = new Artalk({
       el: '#memo_' + memo_id,
