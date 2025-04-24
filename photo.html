@@ -16,6 +16,7 @@
       }
   </style>
 </head>
+<body class="loaded"> 
 <div id="menu-main-mobile" class="menu-main-mobile">
     <ul class="menu">
                 <li >
@@ -69,103 +70,189 @@
    </div>
   </div>
 </div>
-       
- 
-  
-<script src="https://cdn.staticfile.org/fancyapps-ui/4.0.27/fancybox.umd.min.js"></script>
-<script>
-function formatDate(param) {
-if(typeof param === 'number') {
-     param = new Date(param * 1000).toISOString();
-  }
-return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
-}
-</script>
-    
-<div class="memos-header">
-<div class="intro">
-  相册 
-</div>
-<div class="pagetitle"># 记录时光<span class="bb-load"></span></div>
- 
- 
-    <div class="gallery-photos page">
-<img src="/img/loading.svg" style="margin:auto">
- 
- 
-</div>
+  <link href="https://cdn.staticfile.org/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+<script src="https://cdn.staticfile.org/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js" charset="utf-8"></script>
+<div id="wrapper" class="wrapper">
+  <div class="memos-header">
+    <div class="intro"></div>
+    <h2># 相册</h2>
+    <div class="inner"> 
+      <div class="gallery"></div>
+    </div> 
+  </div> 
+</div> 
+
 <style>
-/* 页面初始化 */
-.page-title{display: none;}
-.page-top-card {border-radius: 12px;}
-/* 页面初始化结束 */
-#article-container a img {margin: 0; border-radius:0;}
-.gallery-photos{width:100%;margin-top: 10px;}
-.gallery-photo{min-height:5rem;width:49%;padding:4px;position: relative;}
-.gallery-photo a{display:block;overflow: hidden;border: var(--leonus-border);}
-.gallery-photo img{display: block;width:100%;animation: fadeIn 1s;cursor: pointer;transition: all .4s ease-in-out !important;}
-.gallery-photo span.photo-title,.gallery-photo span.photo-time{max-width: calc(100% - 7px);position:absolute;line-height:1.8;left:4px;font-size:14px;background: rgba(0, 0, 0, 0.3);padding:0px 8px;color: #fff;animation: fadeIn 1s;}
-.gallery-photo span.photo-title{bottom:4px;}
-.gallery-photo span.photo-time{top:4px;}
-.gallery-photo:hover img{transform: scale(1.1);}
-@media screen and (max-width: 1100px) {
-    .gallery-photo{width:33.3%;}
+  .inner .gallery {
+    width: 100%;
+    display: flex;
+    flex-flow: wrap;
+    gap: 10px 20px;
+    padding-bottom: 30px;
+  }
+  
+  .inner .gallery .picture-container {
+    min-width: 200px;
+    flex: 0 0 calc(33.333% - 13.333px);
+    aspect-ratio: 1 / 1; /* 使容器保持正方形 */
+  }
+  
+  @media screen and (max-width: 736px) {
+    .inner .gallery .picture-container {
+      flex: 0 0 calc(50% - 20px);
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .inner .gallery .picture-container {
+      flex: 0 0 100%;
+    }
+  }
+  
+  .inner .gallery .picture-container a {
+    border: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .inner .gallery .picture-container a .img-thumbnail {
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 确保图片填充整个容器 */
+    object-position: center; /* 居中裁剪 */
+  }
+  
+ 
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
-@media screen and (max-width: 900px) {.page-top-card {margin: 0;}}
-@media screen and (max-width: 768px) {
-    .gallery-photo{width:49.9%;padding:3px}
-    .gallery-photo span.photo-time{display:none}
-    .page-top-card {border-radius: 8px;}
-    .gallery-photo span.photo-title{left:3px;bottom:3px;}
+
+#load-more {
+  display: block;
+  margin: 30px auto;
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  width: auto !important;
+  background-color: #f8f8f8;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
-@keyframes fadeIn{0% {opacity: 0;}100%{opacity: 1;}}
+#load-more:hover {
+  background-color: #eee;
+  border-color: #ccc;
+}
+#load-more.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
 </style>
 <script>
-if (1) {
-    let url = 'https://memos.loliko.cn' // 修改api
-    fetch(url + '/api/v1/memo?creatorId=1&tag=照片').then(res => res.json()).then(data => {
-        let html = '',
-            imgs = []
-        data.forEach(item => {
-            let ls = item.content.match(/\!\[.*?\]\(.*?\)/g)
-            if (ls) imgs = imgs.concat(ls)
-            if (item.resourceList.length) {
-                item.resourceList.forEach(t => {
-                    if (t.externalLink) imgs.push(`![](${t.externalLink})`)
-                    else imgs.push(`![](${url}/o/r/${t.id}/${t.publicId}/${t.filename})`)
-                })
+let currentPage = 1;
+const imagesPerPage = 6;
+let allImages = [];
+
+function loadImages(page) {
+    const url = 'https://memos.loliko.cn'; // 修改api
+    const startIndex = (page - 1) * imagesPerPage;
+    const endIndex = startIndex + imagesPerPage;
+
+    fetch(url + '/api/memo?creatorId=1&tag=照片')
+        .then(res => res.json())
+        .then(data => {
+            if (!Array.isArray(data.data)) {
+                throw new Error('Expected data.data to be an array');
             }
-        })
+            let imgs = [];
+            data.data.forEach(item => {
+                let ls = item.content.match(/\!\[.*?\]\(.*?\)/g);
+                if (ls) imgs = imgs.concat(ls);
+                if (item.resourceList && item.resourceList.length) {
+                    item.resourceList.forEach(t => {
+                        if (t.externalLink) imgs.push(`![](${t.externalLink})`);
+                        else imgs.push(`![](${url}/o/r/${t.id}/${t.publicId}/${t.filename})`);
+                    });
+                }
+            });
 
-        if (imgs) imgs.forEach(item => {
-            let img = item.replace(/!\[.*?\]\((.*?)\)/g, '$1'),
-                time, title, tat = item.replace(/!\[(.*?)\]\(.*?\)/g, '$1')
-            if (tat.indexOf(' ') != -1) {
-                time = tat.split(' ')[0]
-                title = tat.split(' ')[1]
-            } else title = tat
-
-            html += `<div class="gallery-photo"><a href="${img}" data-fancybox="gallery" class="fancybox" data-thumb="${img}"><img class="no-lazyload photo-img" loading='lazy' decoding="async" src="${img}"></a>`
-            title ? html += `<span class="photo-title">${title}</span>` : ''
-            time ? html += `<span class="photo-time">${time}</span>` : ''
-            html += `</div>`
+            allImages = imgs;
+            displayImages(startIndex, endIndex);
         })
-console.log(Fancybox);
-        document.querySelector('.gallery-photos.page').innerHTML = html
-        imgStatus.watch('.photo-img', () => { waterfall('.gallery-photos') })
-        window.Lately && Lately.init({ target: '.photo-time' })
-    }).catch()
+        .catch(error => console.error('Error fetching images:', error));
 }
 
+function displayImages(startIndex, endIndex) {
+    let html = '';
+    const imagesToDisplay = allImages.slice(startIndex, endIndex);
+
+    imagesToDisplay.forEach(item => {
+        let img = item.replace(/!\[.*?\]\((.*?)\)/g, '$1'),
+            time, title, tat = item.replace(/!\[(.*?)\]\(.*?\)/g, '$1');
+        if (tat.indexOf(' ') != -1) {
+            [time, title] = tat.split(' ');
+        } else {
+            title = tat;
+        }
+
+        html += `<div class="picture-container">
+            <a target="_blank" rel="noopener"
+                href="${img}"  data-lightbox="${time}" data-title="${title}">
+                <picture>
+                    <img src="${img}" class="img-thumbnail" loading="lazy" alt="${title}">
+                </picture>
+            </a>
+        </div>`;
+    });
+
+    document.querySelector('.gallery').innerHTML += html;
+    if (endIndex < allImages.length) {
+        if (!document.getElementById('load-more')) {
+            const loadMoreButton = document.createElement('button');
+            loadMoreButton.id = 'load-more';
+            loadMoreButton.className = 'post-button';
+            loadMoreButton.innerHTML = '<span class="btn">加载更多</span>';
+            loadMoreButton.onclick = loadNextPage;
+            document.querySelector('.gallery').after(loadMoreButton);
+        }
+    } else {
+        const loadMoreButton = document.getElementById('load-more');
+        if (loadMoreButton) {
+            loadMoreButton.remove();
+        }
+    }
+}
+
+function loadNextPage() {
+    const loadMoreButton = document.getElementById('load-more');
+    loadMoreButton.classList.add('loading');
+
+    currentPage++;
+    const startIndex = (currentPage - 1) * imagesPerPage;
+    const endIndex = startIndex + imagesPerPage;
+
+    // 模拟加载延迟
+    setTimeout(() => {
+        displayImages(startIndex, endIndex);
+        loadMoreButton.classList.remove('loading');
+    }, 1000); // 1秒延迟，你可以根据实际加载时间调整
+}
+
+// 初始加载
+document.addEventListener('DOMContentLoaded', () => {
+    loadImages(currentPage);
+});
 </script>
 <script defer src="./js/waterfall.min.js"></script>
 <script defer src="./js/imgStatus.min.js"></script>
-<script defer src="./js/lately.min.js"></script>
-</div>
+ 
 <div class="footer-background">
     <div class="footer">
-       <div class="footer-info">&copy; 2023 Memos </div>
-       <div class="githuab">
+       <div class="footer-info">&copy; 2025 Memos </div>
+       <div class="github">
          <a href="https://www.loliko.cn/blog/sitemap.xml" target="_blank" ><img class="header-rss" src="./img/rss.svg" alt="RSS" /></a>
          <a href="mailto:jkjoy@126.com"><img class="header-rss" src="./img/email.svg" alt="E-mail" /></a>
        </div> 
@@ -174,6 +261,5 @@ console.log(Fancybox);
    <div class="gotop" onclick="smoothScrollTop()" id="gotop"><img src="./img/up.svg"  ></div>
  </div>
  </div>
- 
 </body>
 </html>

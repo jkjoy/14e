@@ -75,40 +75,13 @@
 <div id="wrapper" class="wrapper">   
 <div class="memos-header">
 <div class="intro">
-    文章 
-</div>
- 
-<div class="links"></div>
 
-<script>
-  var linksUrl = 'https://fr.jiong.us/data.json';
-var linksDom = document.querySelector('.links');
-if (linksDom) {
-	getLinks()
-}
-function getLinks() {
-  fetch(linksUrl).then(res => res.json()).then(resdata => {
-  updateHtml(resdata.article_data);
-  });
-}
-function updateHtml(data){
-  var result = "",
-  resultAll = "";
-  for (var i = 0; i < data.length; i++) {
-    let author = data[i].author,
-    avatar = data[i].avatar,
-    title = data[i].title,
-    link = data[i].link,
-    floor = data[i].floor,
-    created = data[i].created;
-    result +=
-    '<div class="col-12 mt-3"><div class="item-body flex-fill p-3"><div class="item-header d-flex mb-3"><div class="item-avatar mr-3" style="background-image:url('+ avatar +')"></div><div class="item-sub"><div class="item-creator">'+ author +'</div></div></div><div class ="item-content d-flex flex-fill flex-column"><div class="item-inner flex-fill my-2"><a href="'+link+'" target="_blank">'+ title+'</a></div><div class="item-footer d-flex mt-2"><div class="item-time item-tag d-flex align-items-center px-2 text-xs">'+created+'</div><div class="d-flex flex-fill justify-content-end"><div class="item d-flex align-items-center"><i class="iconfont iconthunderbolt"></i><span class="ml-1">'+floor+'</span></div></div></div></div></div></div>';
-  }
-  resultAll = result
-  linksDom.insertAdjacentHTML('beforeend', resultAll);
-}
-</script>
-<script type="text/javascript" src="https://npm.elemecdn.com/fcircle-theme-yyyz@1.0.13/dist/fcircle.min.js"></script>
+</div>
+<h2># 文章 </h2>
+  
+<div id="rss-articles" class="article-list"></div>
+
+ 
 </div>
 </div>
 </div>
@@ -117,13 +90,12 @@ function updateHtml(data){
   document.body.classList.add('loaded');
 });
 </script>
-<script src="./js/marked.min.js"></script>
-<script src="./js/coco-message.min.js"></script>
+ 
 <div class="footer-background">
   <div class="footer">
      <div class="footer-info">&copy; 2023 Memos </div>
      <div class="githuab">
-       <a href="https://www.loliko.cn/blog/sitemap.xml" target="_blank" ><img class="header-rss" src="./img/rss.svg" alt="RSS" /></a>
+       <a href="https://blog.loliko.cn/sitemap.xml" target="_blank" ><img class="header-rss" src="./img/rss.svg" alt="RSS" /></a>
        <a href="mailto:jkjoy@126.com"><img class="header-rss" src="./img/email.svg" alt="E-mail" /></a>
      </div> 
   </div>
@@ -131,6 +103,73 @@ function updateHtml(data){
  <div class="gotop" onclick="smoothScrollTop()" id="gotop"><img src="./img/up.svg"  ></div>
 </div>
 </div>
- 
+
+<script>
+async function fetchRSSArticles() {
+    try {
+        const response = await fetch('https://blog.loliko.cn/index.xml');
+        const xmlText = await response.text();
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+        
+        const items = xmlDoc.querySelectorAll('item');
+        const articleList = document.getElementById('rss-articles');
+        
+        items.forEach(item => {
+            const title = item.querySelector('title').textContent;
+            const link = item.querySelector('link').textContent;
+            const pubDate = new Date(item.querySelector('pubDate').textContent).toLocaleDateString();
+            const description = item.querySelector('description').textContent;
+            
+            const article = document.createElement('div');
+            article.className = 'article-item';
+            article.innerHTML = `
+                <h3><a href="${link}" target="_blank">${title}</a></h3>
+                <div class="article-meta">发布于: ${pubDate}</div>
+                <div class="article-excerpt">${description}</div>
+            `;
+            articleList.appendChild(article);
+        });
+    } catch (error) {
+        console.error('Error fetching RSS:', error);
+        document.getElementById('rss-articles').innerHTML = '<p>无法加载文章列表，请稍后再试。</p>';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', fetchRSSArticles);
+</script>
+
+<style>
+.article-list {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+.article-item {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+.article-item h3 {
+    margin-bottom: 10px;
+}
+.article-item h3 a {
+    color: #333;
+    text-decoration: none;
+}
+.article-item h3 a:hover {
+    color: #0066cc;
+    text-decoration: underline;
+}
+.article-meta {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.article-excerpt {
+    color: #444;
+    line-height: 1.6;
+}
+</style>
 </body>
 </html>
