@@ -74,12 +74,10 @@ fetch(bbUrl).then(res => res.json()).then( resdata =>{
     return
   }
   //在未展开评论时，默认显示评论数
-  document.addEventListener('DOMContentLoaded', () => {
-    Artalk.loadCountWidget({
-      server: 'https://artalk.loliko.cn/',
-      site: '14e', 
-      countEl: '#ArtalkCount'
-    });
+  Artalk.loadCountWidget({
+    server: 'https://artalk.loliko.cn/',
+    site: '14e', 
+    countEl: '#ArtalkCount'
   });
 })
 }
@@ -217,12 +215,10 @@ function getTagNow(e){
     updateHTMl(resdata)
 
   //在未展开评论时，默认显示评论数
-  document.addEventListener('DOMContentLoaded', () => {
-    Artalk.loadCountWidget({
-      server: 'https://artalk.loliko.cn/',
-      site: '14e', 
-      countEl: '#ArtalkCount'
-    });
+  Artalk.loadCountWidget({
+    server: 'https://artalk.loliko.cn/',
+    site: '14e', 
+    countEl: '#ArtalkCount'
   });
   })
 }
@@ -261,7 +257,7 @@ function loadArtalk(memo_id) {
       });
     } else {
     }
-    document.addEventListener('DOMContentLoaded', () => {
+    if (typeof Artalk !== 'undefined') {
       const artalk = new Artalk({
         el: '#memo_' + memo_id,
         pageKey: '/m/' + memo_id,
@@ -270,7 +266,9 @@ function loadArtalk(memo_id) {
         site: '14e',
         darkMode: 'auto'
       });
-    });
+    } else {
+      console.error('Artalk is not loaded');
+    }
   } else {
     commentDiv.classList.add('hidden');
     commentBtn.innerHTML = '<svg width="6px" height="12px" viewBox="0 0 6 12" version="1.1" xmlns="http://www.w3.org/2000/svg"><g><path d="M0.211503518,0.218577027 C0.493508208,-0.072859009 0.95072815,-0.072859009 1.23273284,0.218577027 L5.41780916,4.54361875 C6.19406361,5.34583421 6.19406361,6.65416579 5.41780916,7.45638125 L1.23273284,11.781423 C0.95072815,12.072859 0.493508208,12.072859 0.211503518,11.781423 C-0.0705011726,11.4899869 -0.0705011726,11.0174758 0.211503518,10.7260397 L4.39657984,6.400998 C4.60882491,6.18165462 4.60882491,5.81834538 4.39657984,5.599002 L0.211503518,1.27396027 C-0.0705011726,0.982524238 -0.0705011726,0.510013063 0.211503518,0.218577027 Z"></path></g></svg>';
