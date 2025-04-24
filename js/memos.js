@@ -282,3 +282,11 @@ function handleDarkModeChange(e) {
   }
 }
 handleDarkModeChange(darkModeMatcher);
+
+// 平滑滚动到顶部函数
+window.smoothScrollTop = function() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+};
