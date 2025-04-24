@@ -171,7 +171,7 @@ function updateHTMl(data){
         }
       }
       result += `
-      <li class="bb-list-li img-hide" id="${memo_id}">
+      <li class="bb-list-li" id="${memo_id}">
         <div class="memos-pl">
         <div class="memos_diaoyong_time">${moment(data[i].createdTs * 1000).twitterLong()}</div>
         </div>
