@@ -255,32 +255,31 @@ function loadArtalk(memo_id) {
         top: offset,
         behavior: 'smooth'
       });
-    } else {
-    if (typeof Artalk === 'function') {
-      try {
-        if (typeof ArtalkLite === 'function') {
-          new ArtalkLite({
-            el: '#memo_' + memo_id,
-            pageKey: '/m/' + memo_id,
-            server: 'https://artalk.loliko.cn/',
-            site: '14e',
-            darkMode: 'auto'
-          });
-        } else {
-          new Artalk({
-            el: '#memo_' + memo_id,
-            pageKey: '/m/' + memo_id,
-            server: 'https://artalk.loliko.cn/',
-            site: '14e',
-            darkMode: 'auto'
-          });
-        }
-      } catch (error) {
-        console.error('Error initializing Artalk:', error);
-      }
-    } else {
-      console.error('Artalk is not loaded or is not a constructor');
     }
+    
+    // Initialize Artalk comments
+    try {
+      if (typeof ArtalkLite !== 'undefined') {
+        new ArtalkLite({
+          el: '#memo_' + memo_id,
+          pageKey: '/m/' + memo_id,
+          server: 'https://artalk.loliko.cn/',
+          site: '14e',
+          darkMode: 'auto'
+        });
+      } else if (typeof Artalk !== 'undefined') {
+        new Artalk({
+          el: '#memo_' + memo_id,
+          pageKey: '/m/' + memo_id,
+          server: 'https://artalk.loliko.cn/',
+          site: '14e',
+          darkMode: 'auto'
+        });
+      } else {
+        console.error('Artalk is not loaded');
+      }
+    } catch (error) {
+      console.error('Error initializing Artalk:', error);
     }
   } else {
     commentDiv.classList.add('hidden');
