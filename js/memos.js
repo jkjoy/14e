@@ -256,14 +256,24 @@ function loadArtalk(memo_id) {
       });
     } else {
     }
-    if (typeof Artalk !== 'undefined' && typeof Artalk === 'function') {
-      new Artalk({
-        el: '#memo_' + memo_id,
-        pageKey: '/m/' + memo_id,
-        server: 'https://artalk.loliko.cn/',
-        site: '14e',
-        darkMode: 'auto'
-      });
+    if (typeof Artalk !== 'undefined') {
+      if (typeof ArtalkLite !== 'undefined') {
+        new ArtalkLite({
+          el: '#memo_' + memo_id,
+          pageKey: '/m/' + memo_id,
+          server: 'https://artalk.loliko.cn/',
+          site: '14e',
+          darkMode: 'auto'
+        });
+      } else {
+        new Artalk({
+          el: '#memo_' + memo_id,
+          pageKey: '/m/' + memo_id,
+          server: 'https://artalk.loliko.cn/',
+          site: '14e',
+          darkMode: 'auto'
+        });
+      }
     } else {
       console.error('Artalk is not loaded or is not a constructor');
     }
