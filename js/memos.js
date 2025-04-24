@@ -3,9 +3,9 @@ var memosData = {
 	}
   
 var bbMemo = {
-  memos: 'https://ee.eeeeeeeeeeeeee.ee/',
+  memos: 'https://m.loliko.cn/',
   limit: '15',
-  creatorId: '101',
+  creatorId: '1',
   domId: '#bber',
 };
 if(typeof(bbMemos) !=="undefined"){
@@ -17,7 +17,6 @@ if(typeof(bbMemos) !=="undefined"){
 }
 function loadCssCode(code){
 var style = document.createElement('style');
-style.type = 'text/css';
 style.rel = 'stylesheet';
 style.appendChild(document.createTextNode(code));
 var head = document.getElementsByTagName('head')[0];
@@ -248,7 +247,7 @@ function loadArtalk(memo_id) {
     commentBtn.innerHTML = '<svg width="14px" height="14px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><g fill-rule="evenodd"><path d="M256,0 C397.167,0 512,114.853 512,256 C512,397.147 397.167,512 256,512 C114.833,512 0,397.167 0,256 C0,114.833 114.833,0 256,0 Z M256,39.659 C136.725,39.659 39.659,136.705 39.659,256 C39.659,375.295 136.725,472.341 256,472.341 C375.275,472.341 472.341,375.295 472.341,256 C472.341,136.705 375.295,39.659 256,39.659 Z M242.119,184.217 C249.853,176.523 262.345,176.523 270.079,184.217 L369.227,283.365 C376.921,291.098 376.921,303.591 369.227,311.325 C361.493,319.019 349.001,319.019 341.267,311.325 L256,226.256 L170.931,311.324 C162.622,318.443 150.09,317.472 142.971,309.163 C136.606,301.747 136.606,290.781 142.971,283.365 Z" fill-rule="nonzero"></path></g></svg>';
     //增加评论平滑定位
     const commentLi = document.getElementById(memo_id);
-    const commentLiPosition = commentLi.getBoundingClientRect().top + window.pageYOffset;
+    const commentLiPosition = commentLi.getBoundingClientRect().top + window.scrollY;
     const offset = commentLiPosition - 3.5 * parseFloat(getComputedStyle(document.documentElement).fontSize);
     if ('scrollBehavior' in document.documentElement.style) {
       window.scrollTo({
